@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31009a09a36a7ca4b86beb3394f92e2f, type: 3}
+  m_Name: Room21
+  m_EditorClassIdentifier: 
+  characters:
+  - {fileID: 11400000, guid: b67d10f58a49b95459a6af42dab05f50, type: 2}
+  charactersPositions: []
+  isUnlocked: 0
+  costToBuild: 0
+  underConstructionSprite: {fileID: 21300000, guid: 69dbd62d077b2564aad2a2452b0c5d23,
+    type: 3}
+  constructedSprite: {fileID: 21300000, guid: b9d77313915f92542a1e88346ba0ef79, type: 3}

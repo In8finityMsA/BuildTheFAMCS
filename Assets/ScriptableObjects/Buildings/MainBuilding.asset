@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec86e012804312c41a85f13855c1db21, type: 3}
+  m_Name: MainBuilding
+  m_EditorClassIdentifier: 
+  name: BSU
+  floors:
+  - {fileID: 11400000, guid: 0abe31dc0d0ac7e408717d0a4381e92c, type: 2}
+  - {fileID: 11400000, guid: 6e62813c9d5e09742970060ab201415f, type: 2}
+  - {fileID: 11400000, guid: 2132f062a3a8c7743853f13fa1d48871, type: 2}
+  startPosition: {x: 900, y: 46, z: 0}

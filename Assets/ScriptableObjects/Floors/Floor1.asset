@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e80756bce5a734438cd428a8f1d91a2, type: 3}
+  m_Name: Floor1
+  m_EditorClassIdentifier: 
+  rooms:
+  - {fileID: 11400000, guid: de1907b404ae34a40bef5f708cebf97b, type: 2}
+  - {fileID: 11400000, guid: b2a17cfcaf5661b46baa7a755620c567, type: 2}
+  - {fileID: 11400000, guid: 6dd248e66e31b7a43b06671bf58d417f, type: 2}
+  firstRoomShift: 150
