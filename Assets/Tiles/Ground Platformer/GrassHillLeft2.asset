@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: GrassHillLeft2
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 72f94200b0117034b90150a90daf551f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: aff69401d59373045b72a77e0507654b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
