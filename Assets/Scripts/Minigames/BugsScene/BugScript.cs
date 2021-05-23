@@ -19,18 +19,18 @@ public class BugScript : MonoBehaviour
         timeLeft -= Time.deltaTime;
         if (timeLeft <= 0)
         {
-            movement = new Vector2(Random.Range(-5f, 5f), Random.Range(-5f, 5f));
+            movement = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
             timeLeft += accelerationTime;
         }
     }
     private void OnMouseDown()
     {
-        
+        ManagerBugsScript.Instance.bugs.Remove(this.gameObject);
+        gameObject.SetActive(false);
     }
     private void OnMouseUp()
     {
-        ManagerBugsScript.Instance.bugs.Remove(this.gameObject);
-        gameObject.SetActive(false);
+       
     }
 
     void FixedUpdate()

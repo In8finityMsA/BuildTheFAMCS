@@ -855,6 +855,7 @@ MonoBehaviour:
     type: 3}
   DebaffPrefab: {fileID: 824658121111905792, guid: 7f188fda83a620440b03137b09380071,
     type: 3}
+  EndButton: {fileID: 1811711677}
   CountBaffs: 3
   CountDebaffs: 3
   BaffsToWin: 0

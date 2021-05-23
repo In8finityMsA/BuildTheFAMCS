@@ -65,7 +65,7 @@ public class ManagerBugsScript : MonoBehaviour
         timer -= Time.deltaTime;
         if (timer <= 0 && bugs.Count != 0)
         {
-            for (int i = 0; i < bugAmount; i++)
+            for (int i = 0; i < bugs.Count; i++)
             {
                 bugs[i].SetActive(false);
             }
