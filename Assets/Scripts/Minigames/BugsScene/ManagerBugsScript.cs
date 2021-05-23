@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class ManagerBugsScript : MonoBehaviour
 {
+    public int penalty;
+    public int reward;
+    
     Rect cameraRect;
     public GameObject background;
     Canvas canv;
@@ -89,12 +92,14 @@ public class ManagerBugsScript : MonoBehaviour
             {
                 bugs[i].SetActive(false);
             }
+            MainManager.Instance.Money -= penalty;
             canv.gameObject.GetComponentInChildren<Button>().onClick.AddListener(OnClick);
             canv.gameObject.GetComponentInChildren<Button>().GetComponentInChildren<Text>().text = "You have lost!";
             canv.gameObject.SetActive(true);
         }
         if (bugs.Count == 0)
         {
+            MainManager.Instance.Money += reward;
             canv.gameObject.GetComponentInChildren<Button>().onClick.AddListener(OnClick);
             canv.gameObject.GetComponentInChildren<Button>().GetComponentInChildren<Text>().text = "You have won!";
             canv.gameObject.SetActive(true);

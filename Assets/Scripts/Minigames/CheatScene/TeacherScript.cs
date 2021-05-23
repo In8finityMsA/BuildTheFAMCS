@@ -147,6 +147,8 @@ public class TeacherScript : MonoBehaviour
     void UIIsTurning()
     {
         animator.SetBool("IsTurning", true);
+        animator.SetBool("IsWatching", false);
+        animator.SetBool("IsNotWatching", false);
         GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 1.0f);
 
         //TODO
@@ -157,6 +159,8 @@ public class TeacherScript : MonoBehaviour
     void UIIsNotWatching()
     {
         animator.SetBool("IsNotWatching", true);
+        animator.SetBool("IsTurning", false);
+        animator.SetBool("IsWatching", false);
         Debug.Log("Busy!");
         GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f);
         //TODO
@@ -166,6 +170,8 @@ public class TeacherScript : MonoBehaviour
     void UIIsWatching()
     {
         animator.SetBool("IsWatching", true);
+        animator.SetBool("IsTurning", false);
+        animator.SetBool("IsNotWatching", false);
         Debug.Log("Watching!");
         GetComponent<SpriteRenderer>().color = new Color(1.0f, 0f, 0f);
         //TODO
