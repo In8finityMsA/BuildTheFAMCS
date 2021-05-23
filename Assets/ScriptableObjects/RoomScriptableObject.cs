@@ -10,7 +10,7 @@ public class RoomScriptableObject : ScriptableObject
     public List<CharacterScriptableObject> characters;
     public List<Vector2> charactersPositions; //Doesn't work. For some reason using it leads to character spawn in odd position
     public bool isUnlocked = false;
-    public uint costToBuild;
+    public int costToBuild;
     public Sprite underConstructionSprite;
     public Sprite constructedSprite;
     //internal float height;
