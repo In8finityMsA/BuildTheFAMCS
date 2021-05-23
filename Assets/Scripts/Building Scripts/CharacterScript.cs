@@ -10,18 +10,6 @@ public class CharacterScript : MonoBehaviour
     private CharacterScriptableObject characterInfo;
     private bool isInit = false;
     private List<DialogPart> dialog;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-        
-    }
 
     internal void Init(CharacterScriptableObject character)
     {

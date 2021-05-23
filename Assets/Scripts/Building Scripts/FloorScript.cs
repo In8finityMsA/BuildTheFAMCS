@@ -25,7 +25,8 @@ public class FloorScript : MonoBehaviour
             //room.height = floorInfo.height;
             room.indexInFloor = roomAmount++;
             room.floor = floorInfo.floorNumber;
-            var width = room.underConstructionSprite.bounds.size.x * roomObject.transform.localScale.x;
+            //var width = room.underConstructionSprite.bounds.size.x * roomObject.transform.localScale.x;
+            var width = room.underConstructionSprite.bounds.size.x;
             
             roomObject.transform.SetParent(gameObject.transform);
             roomObject.transform.localPosition = new Vector3(currentWidth, 0, 0);
@@ -38,15 +39,4 @@ public class FloorScript : MonoBehaviour
         }
     }
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

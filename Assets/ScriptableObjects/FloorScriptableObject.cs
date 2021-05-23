@@ -9,6 +9,6 @@ public class FloorScriptableObject : ScriptableObject
     public List<RoomScriptableObject> rooms;
     internal uint floorNumber;
     //public uint height;
-    public int firstRoomShift;
+    public float firstRoomShift;
 
 }
