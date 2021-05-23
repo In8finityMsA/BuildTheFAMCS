@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Minigames/DestroyScene.unity
     guid: e0b91d5defee07441a90af48c1b85019
   - enabled: 1
+    path: Assets/Scenes/Minigames/LatenessScene.unity
+    guid: 9162168f79f493d49ab25a9b7720476f
+  - enabled: 1
     path: Assets/Scenes/Minigames/ServerScene.unity
     guid: 4885e063a5f88b648a55a729fa046e66
   - enabled: 1

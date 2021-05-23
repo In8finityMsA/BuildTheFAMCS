@@ -33,6 +33,25 @@ public class RoomScript : MonoBehaviour
         boxCollider.size = boxCollider.transform.InverseTransformVector(spriteRenderer.bounds.size);
     }
 
+    void RoomUnlock()
+    {
+        MainManager.Instance.Money -= roomInfo.costToBuild;
+        MainManager.Instance.SetRoomUnlocked(roomInfo, true);
+        SetSprite();
+
+        for (int i = 0; i < roomInfo.characters.Count; i++)
+        {
+            var characterObject = Instantiate(characterPrefab, gameObject.transform.position, Quaternion.identity);
+            characterObject.GetComponent<SpriteRenderer>().sortingLayerName = "Characters";
+            characterObject.transform.SetParent(gameObject.transform);
+            //characterObject.transform.localPosition =
+            //  new Vector3(i < roomInfo.charactersPositions.Count ? roomInfo.charactersPositions[i].x : 0,
+            //    i < roomInfo.charactersPositions.Count ? roomInfo.charactersPositions[i].y : 0, CharactersLayerZ);
+
+            characterObject.GetComponent<CharacterScript>().Init(roomInfo.characters[i]);
+        }
+    }
+
     void OnMouseDown()
     {
         time = System.DateTime.Now;
@@ -40,23 +59,19 @@ public class RoomScript : MonoBehaviour
     
     void OnMouseUp()
     {
-        if (System.DateTime.Now - time < new TimeSpan(0, 0, 2))
+        if (System.DateTime.Now - time < new TimeSpan(0, 0, 1))
         {
             Debug.Log($"Room Clicked! floor: {roomInfo.floor}, index: {roomInfo.indexInFloor}.");
-            roomInfo.isUnlocked = true;
-            SetSprite();
-
-            for (int i = 0; i < roomInfo.characters.Count; i++)
+            if (MainManager.Instance.Money >= roomInfo.costToBuild && roomInfo.isUnlocked == false)
             {
-                var characterObject = Instantiate(characterPrefab, gameObject.transform.position, Quaternion.identity);
-                characterObject.GetComponent<SpriteRenderer>().sortingLayerName = "Characters";
-                characterObject.transform.SetParent(gameObject.transform);
-                //characterObject.transform.localPosition =
-                //  new Vector3(i < roomInfo.charactersPositions.Count ? roomInfo.charactersPositions[i].x : 0,
-                //    i < roomInfo.charactersPositions.Count ? roomInfo.charactersPositions[i].y : 0, CharactersLayerZ);
-
-                characterObject.GetComponent<CharacterScript>().Init(roomInfo.characters[i]);
+                RoomUnlock();
+                Debug.Log("Room is unlocked");
             }
+            else if (roomInfo.isUnlocked == false)
+            {
+                Debug.Log("Room can't be unlocked. Not enough money.");
+            }
+            
         }
     }
     
