@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Minigames/DestroyScene.unity
     guid: e0b91d5defee07441a90af48c1b85019
   - enabled: 1
