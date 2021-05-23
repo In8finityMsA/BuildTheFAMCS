@@ -13,6 +13,8 @@ public class ManagerWordsScript : MonoBehaviour
     public float time;
     public Rect cameraRect;
 
+    public GameObject background;
+
     public static ManagerWordsScript Instance { get; private set; }
     char[] array;
     string text;
@@ -25,6 +27,17 @@ public class ManagerWordsScript : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
+
+        SpriteRenderer spriteRenderer = background.GetComponent<SpriteRenderer>();
+        float cameraHeight = Camera.main.orthographicSize * 2;
+        Vector2 cameraSize = new Vector2(Camera.main.aspect * cameraHeight, cameraHeight);
+        Vector2 spriteSize = spriteRenderer.sprite.bounds.size;
+        Vector2 scale = transform.localScale;
+        scale.x *= cameraSize.x / spriteSize.x;
+        scale.y *= cameraSize.y / spriteSize.y;
+        background.transform.position = Vector2.zero; // Optional
+        background.transform.localScale = scale;
+
         var bottomLeft = Camera.main.ScreenToWorldPoint(Vector3.zero);
         var topRight = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, Camera.main.pixelHeight));
         cameraRect = new Rect(bottomLeft.x, bottomLeft.y, topRight.x - bottomLeft.x, topRight.y - bottomLeft.y);
