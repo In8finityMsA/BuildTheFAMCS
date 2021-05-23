@@ -65,19 +65,17 @@ public class PhoneScript : MonoBehaviour
     {
         if (!isEnding)
         {
-            if (mouseDown && !cheated)
-            {
-                ManagerScript.Instance.CurrentProgress += Time.deltaTime;
-                progress += Time.deltaTime;
-            }
             if (progress >= ManagerScript.ENOUGH && !cheated)
             {
-                ManagerScript.Instance.CurrentProgress -= progress - ManagerScript.ENOUGH;
-                //ManagerScript.Instance.students.Remove(this);
                 cheated = true;
                 isCheating = false;
                 OnCheatedHandler();
             }
+            if (mouseDown && !cheated)
+            {
+                ManagerScript.Instance.CurrentProgress += Time.deltaTime;
+                progress += Time.deltaTime;
+            }          
         }
         else
         {

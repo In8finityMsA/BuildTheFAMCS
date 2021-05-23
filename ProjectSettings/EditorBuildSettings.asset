@@ -8,9 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
-    path: Assets/Scenes/Minigames/CheatScene.unity
-    guid: 4f3a6336f489a034dba7e7bc4216eb49
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Minigames/DestroyScene.unity
     guid: e0b91d5defee07441a90af48c1b85019
@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Minigames/WordScene.unity
     guid: 2695286a452a1ca40b949c045da71949
+  - enabled: 1
+    path: Assets/Scenes/Minigames/BugsScene.unity
+    guid: 00501715d13fd48489f5af0d253a047c
+  - enabled: 1
+    path: Assets/Scenes/Minigames/CheatScene.unity
+    guid: e4547fcdfa6ded248b0e1c4309333167
   m_configObjects: {}
