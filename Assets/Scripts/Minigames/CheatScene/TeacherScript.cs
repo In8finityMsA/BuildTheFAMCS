@@ -36,7 +36,7 @@ public class TeacherScript : MonoBehaviour
         IsWatchingHandler += UIIsWatching;
         IsNotWatchingHandler += UIIsNotWatching;
         IsStartWatchingHandler += UIIsTurning;
-        movement = 0.005f;
+        movement = 0.01f;
 
         //??? can we find it dynamically?
         animationStartTime = (float)2;
@@ -53,16 +53,7 @@ public class TeacherScript : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        if (gameObject.transform.position.x < ManagerScript.Instance.cameraRect.x + ManagerScript.Instance.cameraRect.width / 4)
-        {
-            movement = -movement;
-        }
-        else if (gameObject.transform.position.x > ManagerScript.Instance.cameraRect.x + 3 * ManagerScript.Instance.cameraRect.width / 4)
-        {
-            movement = -movement;
-        }
-        gameObject.transform.position = new Vector3(gameObject.transform.position.x + movement, gameObject.transform.position.y, 0);
+    {        
         time += Time.deltaTime;
         if (isAngry)
         {
@@ -108,12 +99,25 @@ public class TeacherScript : MonoBehaviour
             }
             else if (time + animationStartTime >= ManagerScript.FREQUENCY)
             {
-                Debug.Log($"time minused. Time {time}");
+                //Debug.Log($"time minused. Time {time}");
                 time = ManagerScript.FREQUENCY - animationStartTime;
                 IsStartWatchingHandler();
                 isTurning = true;
             }
         }
+    }
+
+    private void FixedUpdate()
+    {
+        if (gameObject.transform.position.x < ManagerScript.Instance.cameraRect.x + ManagerScript.Instance.cameraRect.width / 4)
+        {
+            movement = -movement;
+        }
+        else if (gameObject.transform.position.x > ManagerScript.Instance.cameraRect.x + 3 * ManagerScript.Instance.cameraRect.width / 4)
+        {
+            movement = -movement;
+        }
+        gameObject.transform.position = new Vector3(gameObject.transform.position.x + movement, gameObject.transform.position.y, 0);
     }
 
     void GenerateWatchingPeriod()

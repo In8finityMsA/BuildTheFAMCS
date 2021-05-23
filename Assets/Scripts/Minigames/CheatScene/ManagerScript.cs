@@ -49,8 +49,7 @@ public class ManagerScript : MonoBehaviour
         EndScript end = EndScript.Instance;
         end.gameObject.SetActive(true);
         end.btn.gameObject.GetComponentInChildren<Text>().text = "You've lost! The teacher saw you cheating!";
-        end.btn.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(OnClick);      
-        //Debug.Log("button");       
+        end.btn.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(OnClick);             
     }
 
     private void Clear()
@@ -99,15 +98,6 @@ public class ManagerScript : MonoBehaviour
         Instance = this;
         studentAmount = 2;
         PlaceStudents();
-        //HELP: how to locate them???
-        //int length = (int)studentAmount / 4;
-        //for (int i = 0; i < 4; i++)
-        //{
-        //    for (int j = 0; j < length; j++)
-        //    {
-        //        Instantiate(prefab, new Vector3(2 * i, 2 * j - 4, 0), Quaternion.identity);
-        //    }           
-        //}
     }
 
     void PlaceStudents()
@@ -131,16 +121,6 @@ public class ManagerScript : MonoBehaviour
             {
                 GameObject gameOb = Instantiate(prefab, new Vector3(xCoordRow + 2 * i, yCoordSecond, 0), Quaternion.identity);
             }
-            //foreach (var item in array)
-            //{
-            //    gameOb = Instantiate(tilePrefab, new Vector3(xCoordTile + 2 * i, yCoordTile, 0), Quaternion.identity);
-            //    Debug.Log(gameOb.transform.position.ToString());
-            //    tiles.Add(gameOb);
-
-            //    i++;
-
-            //}
-            //i = 0;
         }
         else
         {
