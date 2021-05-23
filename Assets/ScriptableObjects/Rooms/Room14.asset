@@ -19,4 +19,4 @@ MonoBehaviour:
   costToBuild: 0
   underConstructionSprite: {fileID: 21300000, guid: 69dbd62d077b2564aad2a2452b0c5d23,
     type: 3}
-  constructedSprite: {fileID: 21300000, guid: 9c9c491c8df25a149abba5cae0438886, type: 3}
+  constructedSprite: {fileID: 21300000, guid: 53e228e671a271f42bef05a30e50aa86, type: 3}
