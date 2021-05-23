@@ -32,6 +32,14 @@ public class TeacherScript : MonoBehaviour
     public delegate void OnNotWatching();
     public event OnNotWatching IsNotWatchingHandler;
 
+    private bool faceLeft = true;
+    void flip()
+    {
+        faceLeft = !faceLeft;
+        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+    }
+
+
     void Start()
     {
         IsWatchingHandler += UIIsWatching;
@@ -119,6 +127,10 @@ public class TeacherScript : MonoBehaviour
             movement = -movement;
         }
         gameObject.transform.position = new Vector3(gameObject.transform.position.x + movement, gameObject.transform.position.y, 0);
+        if (movement > 0 && !faceLeft)
+            flip();
+        else if (movement < 0 && faceLeft)
+            flip();
     }
 
     void GenerateWatchingPeriod()
@@ -166,3 +178,4 @@ public class TeacherScript : MonoBehaviour
         GetComponent<SpriteRenderer>().color = new Color(0.2f, 0.2f, 0.2f);
     }
 }
+
