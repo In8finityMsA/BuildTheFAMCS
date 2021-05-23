@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using UnityEngine.UI;
 
@@ -64,7 +65,8 @@ public class ManagerScript : MonoBehaviour
 
     public void OnClick()
     {
-        UnityEditor.EditorApplication.isPlaying = false;
+        SceneManager.LoadScene("MainScene");
+        //UnityEditor.EditorApplication.isPlaying = false;
     }
 
     public void EndHappened()

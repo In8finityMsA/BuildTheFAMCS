@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ManagerWordsScript : MonoBehaviour
@@ -31,7 +32,7 @@ public class ManagerWordsScript : MonoBehaviour
         mouseDown = false;
         Instance = this;
         //params 
-        text = "Learn fourth grade math—arithmetic, measurement, _________, fractions, and more. This course is aligned with Common Core standards.";
+        text = "Learn fourth grade mathâ€”arithmetic, measurement, _________, fractions, and more. This course is aligned with Common Core standards.";
         array = new char[] { 'g', 'e', 'o','m','e','t','r','y' }; 
 
         int i = 0;
@@ -166,7 +167,8 @@ public class ManagerWordsScript : MonoBehaviour
     }
     void OnClick()
     {
-        UnityEditor.EditorApplication.isPlaying = false;
+        SceneManager.LoadScene("MainScene");
+        //UnityEditor.EditorApplication.isPlaying = false;
     }
     // Update is called once per frame
     void Update()
