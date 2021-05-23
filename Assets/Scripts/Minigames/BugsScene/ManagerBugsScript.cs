@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ManagerBugsScript : MonoBehaviour
@@ -18,6 +19,7 @@ public class ManagerBugsScript : MonoBehaviour
     public List<GameObject> bugs = new List<GameObject>();
     public float speed;
     public int bugAmount;
+    private bool isClicked = false;
 
     public float Parabola(float x)
     {
@@ -50,7 +52,12 @@ public class ManagerBugsScript : MonoBehaviour
     }
     void OnClick()
     {
-        UnityEditor.EditorApplication.isPlaying = false;
+        if (!isClicked)
+        {
+            isClicked = true;
+            SceneManager.LoadScene("MainScene");
+        }
+
     }
     void Start()
     {

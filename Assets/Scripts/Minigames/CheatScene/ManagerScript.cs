@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using UnityEngine.UI;
 
@@ -41,6 +42,8 @@ public class ManagerScript : MonoBehaviour
     public delegate void OnTheEnd();
     public event OnTheEnd OnTheEndHandler;
 
+    private bool isClicked = false;
+
     public void EndGotHim()
     {
 
@@ -63,7 +66,11 @@ public class ManagerScript : MonoBehaviour
 
     public void OnClick()
     {
-        UnityEditor.EditorApplication.isPlaying = false;
+        if (!isClicked)
+        {
+            isClicked = true;
+            SceneManager.LoadScene("MainScene");
+        }
     }
 
     public void EndHappened()

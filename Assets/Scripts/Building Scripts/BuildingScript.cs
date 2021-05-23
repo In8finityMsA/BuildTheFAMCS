@@ -22,10 +22,11 @@ public class BuildingScript : MonoBehaviour
             floor.floorNumber = floorAmount++;
             //Warning: All rooms in the floor must have the same height
             //currentHeight += floor.rooms[0] != null ? floor.rooms[0].underConstructionSprite.bounds.size.y * roomPrefab.transform.localScale.y : 0; 
-            currentHeight += floor.rooms[0] != null ? floor.rooms[0].underConstructionSprite.bounds.size.y: 0; 
+            
             
             floorObject.transform.SetParent(gameObject.transform);
-            floorObject.transform.localPosition = new Vector3(floor.firstRoomShift, currentHeight, 0);
+            floorObject.transform.localPosition = new Vector3(floor.firstRoomShift, currentHeight + floor.rooms[0].constructedSprite.bounds.size.y, 0);
+            currentHeight += floor.rooms[0].constructedSprite.bounds.size.y; 
 
             floorObject.GetComponent<FloorScript>().Init(floor);
         }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ManagerWordsScript : MonoBehaviour
@@ -19,6 +20,8 @@ public class ManagerWordsScript : MonoBehaviour
     List<GameObject> tiles = new List<GameObject>();
     Dictionary<GameObject, int> dict = new Dictionary<GameObject, int>();
     List<char> letters = new List<char>();
+
+    private bool isClicked = false;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -31,7 +34,7 @@ public class ManagerWordsScript : MonoBehaviour
         mouseDown = false;
         Instance = this;
         //params 
-        text = "Learn fourth grade math—arithmetic, measurement, _________, fractions, and more. This course is aligned with Common Core standards.";
+        text = "Learn fourth grade mathâ€”arithmetic, measurement, _________, fractions, and more. This course is aligned with Common Core standards.";
         array = new char[] { 'g', 'e', 'o','m','e','t','r','y' }; 
 
         int i = 0;
@@ -166,7 +169,11 @@ public class ManagerWordsScript : MonoBehaviour
     }
     void OnClick()
     {
-        UnityEditor.EditorApplication.isPlaying = false;
+        if (!isClicked)
+        {
+            isClicked = true;
+            SceneManager.LoadScene("MainScene");
+        }
     }
     // Update is called once per frame
     void Update()

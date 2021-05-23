@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ManagerTapScript : MonoBehaviour
@@ -35,6 +36,8 @@ public class ManagerTapScript : MonoBehaviour
 
 
     public float endAnimationTime;
+
+    private bool isClicked = false;
 
     private void Awake()
     {
@@ -81,7 +84,11 @@ public class ManagerTapScript : MonoBehaviour
 
     void OnClick()
     {
-        UnityEditor.EditorApplication.isPlaying = false;
+        if (!isClicked)
+        {
+            isClicked = true;
+            SceneManager.LoadScene("MainScene");
+        }
     }
 
     void UIEndWinAnimation()
