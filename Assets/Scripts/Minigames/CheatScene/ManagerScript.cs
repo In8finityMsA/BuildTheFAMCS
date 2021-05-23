@@ -42,6 +42,8 @@ public class ManagerScript : MonoBehaviour
     public delegate void OnTheEnd();
     public event OnTheEnd OnTheEndHandler;
 
+    private bool isClicked = false;
+
     public void EndGotHim()
     {
 
@@ -64,8 +66,11 @@ public class ManagerScript : MonoBehaviour
 
     public void OnClick()
     {
-        SceneManager.LoadScene("MainScene");
-        //UnityEditor.EditorApplication.isPlaying = false;
+        if (!isClicked)
+        {
+            isClicked = true;
+            SceneManager.LoadScene("MainScene");
+        }
     }
 
     public void EndHappened()

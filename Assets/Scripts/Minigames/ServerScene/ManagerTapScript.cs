@@ -37,6 +37,8 @@ public class ManagerTapScript : MonoBehaviour
 
     public float endAnimationTime;
 
+    private bool isClicked = false;
+
     private void Awake()
     {
         Instance = this;
@@ -82,8 +84,11 @@ public class ManagerTapScript : MonoBehaviour
 
     void OnClick()
     {
-        SceneManager.LoadScene("MainScene");
-        //UnityEditor.EditorApplication.isPlaying = false;
+        if (!isClicked)
+        {
+            isClicked = true;
+            SceneManager.LoadScene("MainScene");
+        }
     }
 
     void UIEndWinAnimation()

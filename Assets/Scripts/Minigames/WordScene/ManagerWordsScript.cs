@@ -20,6 +20,8 @@ public class ManagerWordsScript : MonoBehaviour
     List<GameObject> tiles = new List<GameObject>();
     Dictionary<GameObject, int> dict = new Dictionary<GameObject, int>();
     List<char> letters = new List<char>();
+
+    private bool isClicked = false;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -167,8 +169,11 @@ public class ManagerWordsScript : MonoBehaviour
     }
     void OnClick()
     {
-        SceneManager.LoadScene("MainScene");
-        //UnityEditor.EditorApplication.isPlaying = false;
+        if (!isClicked)
+        {
+            isClicked = true;
+            SceneManager.LoadScene("MainScene");
+        }
     }
     // Update is called once per frame
     void Update()
