@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class ManagerScript : MonoBehaviour
 {
+    public int penalty;
+    public int reward;
     
     //in inspector
     public GameObject prefab;
@@ -51,6 +53,7 @@ public class ManagerScript : MonoBehaviour
 
         Clear();
         EndScript end = EndScript.Instance;
+        MainManager.Instance.Money -= penalty;
         end.gameObject.SetActive(true);
         end.btn.gameObject.GetComponentInChildren<Text>().text = "You've lost! The teacher saw you cheating!";
         end.btn.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(OnClick);             
@@ -91,6 +94,7 @@ public class ManagerScript : MonoBehaviour
     {
         Clear();
         EndScript end = EndScript.Instance;
+        MainManager.Instance.Money -= penalty;
         end.gameObject.SetActive(true);
         end.btn.gameObject.GetComponentInChildren<Text>().text = "You've lost! The lesson is over!";
             
@@ -180,6 +184,7 @@ public class ManagerScript : MonoBehaviour
         //TODO
         Clear();
         EndScript end = EndScript.Instance;
+        MainManager.Instance.Money += reward;
         end.gameObject.SetActive(true);
         end.btn.gameObject.GetComponentInChildren<Text>().text = "You have won!";
 

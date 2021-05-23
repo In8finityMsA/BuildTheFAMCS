@@ -31,7 +31,8 @@ public class CharacterScript : MonoBehaviour
         }
         else
         {
-            throw new FileNotFoundException();
+            Debug.Log("No dialog file found: " + jsonRelativeFilename);
+            //throw new FileNotFoundException();
         }
     }
     

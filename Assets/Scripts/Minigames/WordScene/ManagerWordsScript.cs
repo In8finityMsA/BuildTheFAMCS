@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 public class ManagerWordsScript : MonoBehaviour
 {
+    public int penalty;
+    public int reward;
+    
     public GameObject wordPrefab;
     public GameObject tilePrefab;
     public bool mouseDown;
@@ -199,11 +202,13 @@ public class ManagerWordsScript : MonoBehaviour
             TheEndTileScript.Instance.gameObject.GetComponentInChildren<Button>().onClick.AddListener(OnClick);
             if (HasWon())
             {
+                MainManager.Instance.Money += reward;
                 TheEndTileScript.Instance.gameObject.GetComponentInChildren<Button>().GetComponentInChildren<Text>().text = "You have won!";
                 
             }
             else
             {
+                MainManager.Instance.Money -= penalty;
                 TheEndTileScript.Instance.gameObject.GetComponentInChildren<Button>().GetComponentInChildren<Text>().text = "You have lost!";
             }
             TheEndTileScript.Instance.gameObject.SetActive(true);
