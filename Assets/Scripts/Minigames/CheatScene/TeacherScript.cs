@@ -148,6 +148,7 @@ public class TeacherScript : MonoBehaviour
     {
         animator.SetBool("IsTurning", true);
         GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 1.0f);
+
         //TODO
         //place to start animation of turning teacher (if we have, else nothing)
     }
