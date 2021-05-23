@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 8634042412846341638}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1994.4653, y: 600.1115, z: -1853.6302}
-  m_LocalScale: {x: 100, y: 100, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_Size: {x: 10.24, y: 10.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &-5335248625118356396
@@ -95,7 +95,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00bfb62b302d08a489b9859d0c2ec75b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomInfo: {fileID: 0}
   characterPrefab: {fileID: 8076097876902752851, guid: ad22b120a6817ae4496b26f940158351,
     type: 3}
 --- !u!61 &4666691551809491341

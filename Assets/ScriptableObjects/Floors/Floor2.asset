@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rooms:
   - {fileID: 11400000, guid: 73fcfd07d67d94c47a5a9677e136a0e0, type: 2}
-  firstRoomShift: 300
+  firstRoomShift: 3
