@@ -15,8 +15,8 @@ MonoBehaviour:
   characters:
   - {fileID: 11400000, guid: 30064a33ba0066c47ae0f874dd21d13c, type: 2}
   charactersPositions: []
-  isUnlocked: 1
-  costToBuild: 0
-  underConstructionSprite: {fileID: 21300000, guid: 69dbd62d077b2564aad2a2452b0c5d23,
+  isUnlocked: 0
+  costToBuild: 70
+  underConstructionSprite: {fileID: 21300000, guid: 76988c12eb1af76408fbff1c5d37cddd,
     type: 3}
   constructedSprite: {fileID: 21300000, guid: 7dd87233af37a3244918468342c3df7b, type: 3}
