@@ -6,6 +6,7 @@ public class TeacherScript : MonoBehaviour
 {
     // time after last wathcing started
     public float time;
+    public Animator animator;
 
     // how much time left for watching
     public float timeWatching = 0;
@@ -127,15 +128,22 @@ public class TeacherScript : MonoBehaviour
         temp += ManagerScript.FREQUENCY - timeWatching;
     }
 
+    public bool IsNotWatching = false;
+    public bool IsWatching = false;
+    public bool IsTurning = false;
+
     void UIIsTurning()
     {
+        animator.SetBool("IsTurning", true);
         GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 1.0f);
         //TODO
         //place to start animation of turning teacher (if we have, else nothing)
     }
 
+
     void UIIsNotWatching()
     {
+        animator.SetBool("IsNotWatching", true);
         Debug.Log("Busy!");
         GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f);
         //TODO
@@ -144,6 +152,7 @@ public class TeacherScript : MonoBehaviour
 
     void UIIsWatching()
     {
+        animator.SetBool("IsWatching", true);
         Debug.Log("Watching!");
         GetComponent<SpriteRenderer>().color = new Color(1.0f, 0f, 0f);
         //TODO
