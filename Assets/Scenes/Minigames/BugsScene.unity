@@ -1079,6 +1079,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ac999f1a4ad5964da119fa41e1916f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  background: {fileID: 511004189}
   top: {fileID: 1466752600}
   timer: 0
   bottom: {fileID: 28296708}

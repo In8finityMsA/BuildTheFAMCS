@@ -407,6 +407,7 @@ MonoBehaviour:
     y: 0
     width: 0
     height: 0
+  background: {fileID: 1595707087}
 --- !u!1 &820431896
 GameObject:
   m_ObjectHideFlags: 0

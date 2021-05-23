@@ -13,7 +13,7 @@ public class ManagerTapScript : MonoBehaviour
     public delegate void OnTapSpeedChange();
     public event OnTapSpeedChange OnTapSpeedChangeHandler;
 
-
+    public GameObject background;
     //limits time
     public float timeForGame;
 
@@ -42,6 +42,17 @@ public class ManagerTapScript : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+
+
+        SpriteRenderer spriteRenderer = background.GetComponent<SpriteRenderer>();
+        float cameraHeight = Camera.main.orthographicSize * 2;
+        Vector2 cameraSize = new Vector2(Camera.main.aspect * cameraHeight, cameraHeight);
+        Vector2 spriteSize = spriteRenderer.sprite.bounds.size;
+        Vector2 scale = transform.localScale;
+        scale.x *= cameraSize.x / spriteSize.x;
+        scale.y *= cameraSize.y / spriteSize.y;
+        background.transform.position = Vector2.zero; // Optional
+        background.transform.localScale = scale;
     }
 
     void Start()

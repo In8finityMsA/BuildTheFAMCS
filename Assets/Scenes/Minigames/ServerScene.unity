@@ -256,6 +256,8 @@ MonoBehaviour:
   A: 0
   B: 0
   curLoad: 0
+  taps: 0
+  times: 0
 --- !u!1 &132338105
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,6 +485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tap: {fileID: 0}
+  background: {fileID: 190142778}
   timeForGame: 0
   scoresNeededToWin: 0
   isWinning: 0

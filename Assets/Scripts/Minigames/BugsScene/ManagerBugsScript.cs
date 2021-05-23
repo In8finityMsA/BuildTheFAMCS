@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class ManagerBugsScript : MonoBehaviour
 {
     Rect cameraRect;
+    public GameObject background;
     Canvas canv;
     public GameObject top;
     public float timer;
@@ -39,6 +40,18 @@ public class ManagerBugsScript : MonoBehaviour
         top.transform.position = new Vector3(cameraRect.x, cameraRect.y + cameraRect.height, 0);
         left.transform.position = new Vector3(cameraRect.x, cameraRect.y, 0);
         right.transform.position = new Vector3(cameraRect.x + cameraRect.width, cameraRect.y + cameraRect.height, 0);
+
+        SpriteRenderer spriteRenderer = background.GetComponent<SpriteRenderer>();
+        float cameraHeight = Camera.main.orthographicSize * 2;
+        Vector2 cameraSize = new Vector2(Camera.main.aspect * cameraHeight, cameraHeight);
+        Vector2 spriteSize = spriteRenderer.sprite.bounds.size;
+        Vector2 scale = transform.localScale;
+        scale.x *= cameraSize.x / spriteSize.x;
+        scale.y *= cameraSize.y / spriteSize.y;
+        background.transform.position = Vector2.zero; // Optional
+        background.transform.localScale = scale;
+
+
         bugAmount = 5;
         speed = 2;
         Instance = this;

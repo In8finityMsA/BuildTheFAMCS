@@ -11,6 +11,8 @@ public class ManagerScript : MonoBehaviour
     //in inspector
     public GameObject prefab;
 
+    public GameObject background;
+
     public TeacherScript teacher;
     public Rect cameraRect;
 
@@ -100,6 +102,30 @@ public class ManagerScript : MonoBehaviour
         var bottomLeft = Camera.main.ScreenToWorldPoint(Vector3.zero);
         var topRight = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, Camera.main.pixelHeight));
         cameraRect = new Rect(bottomLeft.x, bottomLeft.y, topRight.x - bottomLeft.x, topRight.y - bottomLeft.y);
+
+
+        //background.transform.position = new Vector3(cameraRect.x + cameraRect.width/2, cameraRect.y + cameraRect.height/2, 0);
+        ////background.transform.localScale = new Vector3(background.transform.lossyScale.x, background.transform.lossyScale.y, 0);
+        //background.transform.localScale = new Vector3(Screen.width / 847, Screen.height / 476, 0);
+        //Debug.Log(Screen.width + "ffffffffffff " + Screen.height  + "cccccccccc" + cameraRect.width + "ddddd" + cameraRect.height);
+        //Debug.Log(background.transform.lossyScale.x + "ffffffffffff " + background.transform.lossyScale.y + "cccccccccc" + cameraRect.width + "ddddd" + cameraRect.height);
+
+
+        SpriteRenderer spriteRenderer = background.GetComponent<SpriteRenderer>();
+
+
+        //setting background
+        float cameraHeight = Camera.main.orthographicSize * 2;
+        Vector2 cameraSize = new Vector2(Camera.main.aspect * cameraHeight, cameraHeight);
+        Vector2 spriteSize = spriteRenderer.sprite.bounds.size;
+        Vector2 scale = transform.localScale;
+        scale.x *= cameraSize.x / spriteSize.x;        
+        scale.y *= cameraSize.y / spriteSize.y;
+        background.transform.position = Vector2.zero; // Optional
+        background.transform.localScale = scale;
+
+
+
         Instance = this;
         studentAmount = 2;
         PlaceStudents();
