@@ -32,7 +32,7 @@ public class TeacherScript : MonoBehaviour
     public delegate void OnNotWatching();
     public event OnNotWatching IsNotWatchingHandler;
 
-    private bool faceLeft = true;
+    private bool faceLeft = false;
     void flip()
     {
         faceLeft = !faceLeft;
