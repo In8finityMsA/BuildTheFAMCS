@@ -16,4 +16,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: de1907b404ae34a40bef5f708cebf97b, type: 2}
   - {fileID: 11400000, guid: b2a17cfcaf5661b46baa7a755620c567, type: 2}
   - {fileID: 11400000, guid: 6dd248e66e31b7a43b06671bf58d417f, type: 2}
-  firstRoomShift: 1.5
+  firstRoomShift: 0

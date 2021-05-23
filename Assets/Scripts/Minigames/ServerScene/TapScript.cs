@@ -26,6 +26,9 @@ public class TapScript : MonoBehaviour
     public delegate void OnStart();
     public event OnStart AnimationStartHandler;
 
+    public int taps;
+    public int times;
+
     // Start is called before the first frame update
 
     void Start()
@@ -56,39 +59,42 @@ public class TapScript : MonoBehaviour
 
     void Update()
     {
-        
-        time += Time.deltaTime;                
+
+        time += Time.deltaTime;
         newTapSpeed = 1 / (time - timeDown);
+
         if (newTapSpeed >= B)
         {
-            if (newTapSpeed - B >= 3)
+            if (newTapSpeed - B >= 0.5f * B)
             {
-                curLoad += -(float)delta * 3;
+                curLoad += -(float) delta * 3;
             }
-            else if (newTapSpeed - B >= 2)
+            else if (newTapSpeed - B >= 0.33f * B)
             {
-                curLoad += -(float)delta * 2;
+                curLoad += -(float) delta * 2;
             }
             else
             {
-                curLoad += -(float)delta;
+                curLoad += -(float) delta;
             }
         }
+
         if (newTapSpeed < A)
         {
-            if (A - newTapSpeed >= 3)
+            if (A - newTapSpeed >= 0.5f * A)
             {
-                curLoad += (float)delta * 3;
+                curLoad += (float) delta * 3;
             }
-            else if (A - newTapSpeed >= 2)
+            else if (A - newTapSpeed >= 0.33f * A)
             {
-                curLoad += (float)delta * 2;
+                curLoad += (float) delta * 2;
             }
             else
             {
-                curLoad += (float)delta;
+                curLoad += (float) delta;
             }
         }
+
         tapSpeed = newTapSpeed;
         if (curLoad < minLoad)
         {
@@ -99,22 +105,21 @@ public class TapScript : MonoBehaviour
             curLoad = maxLoad;
         }
     }
-     
-
+    
     void OnMouseDown()
     {
-        if (!mouseDown && !isEnding)
+        if (!isEnding)
         {       
             mouseDown = true;
             timeDown = time;
         }
     }
 
-    void OnMouseUp()
+    /*void OnMouseUp()
     {
         if (mouseDown && !isEnding)
         {
             mouseDown = false;
         }
-    }
+    }*/
 }

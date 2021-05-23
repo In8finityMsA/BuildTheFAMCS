@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RoomScript : MonoBehaviour
@@ -8,6 +6,7 @@ public class RoomScript : MonoBehaviour
     private RoomScriptableObject roomInfo;
     private bool isInit = false;
     public GameObject characterPrefab;
+    private DateTime time;
 
     internal void Init(RoomScriptableObject room)
     {
@@ -25,7 +24,7 @@ public class RoomScript : MonoBehaviour
         }
     }
 
-    void SetSprite()
+    private void SetSprite()
     {
         var spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = roomInfo.isUnlocked ? roomInfo.constructedSprite : roomInfo.underConstructionSprite;
@@ -36,20 +35,28 @@ public class RoomScript : MonoBehaviour
 
     void OnMouseDown()
     {
-        Debug.Log($"Room Clicked! floor: {roomInfo.floor}, index: {roomInfo.indexInFloor}.");
-        roomInfo.isUnlocked = true;
-        SetSprite();
-
-        for (int i = 0; i < roomInfo.characters.Count; i++)
+        time = System.DateTime.Now;
+    }
+    
+    void OnMouseUp()
+    {
+        if (System.DateTime.Now - time < new TimeSpan(0, 0, 2))
         {
-            var characterObject = Instantiate(characterPrefab, gameObject.transform.position, Quaternion.identity);
-            characterObject.GetComponent<SpriteRenderer>().sortingLayerName = "Characters";
-            characterObject.transform.SetParent(gameObject.transform);
-            //characterObject.transform.localPosition =
-              //  new Vector3(i < roomInfo.charactersPositions.Count ? roomInfo.charactersPositions[i].x : 0,
+            Debug.Log($"Room Clicked! floor: {roomInfo.floor}, index: {roomInfo.indexInFloor}.");
+            roomInfo.isUnlocked = true;
+            SetSprite();
+
+            for (int i = 0; i < roomInfo.characters.Count; i++)
+            {
+                var characterObject = Instantiate(characterPrefab, gameObject.transform.position, Quaternion.identity);
+                characterObject.GetComponent<SpriteRenderer>().sortingLayerName = "Characters";
+                characterObject.transform.SetParent(gameObject.transform);
+                //characterObject.transform.localPosition =
+                //  new Vector3(i < roomInfo.charactersPositions.Count ? roomInfo.charactersPositions[i].x : 0,
                 //    i < roomInfo.charactersPositions.Count ? roomInfo.charactersPositions[i].y : 0, CharactersLayerZ);
-            
-            characterObject.GetComponent<CharacterScript>().Init(roomInfo.characters[i]);
+
+                characterObject.GetComponent<CharacterScript>().Init(roomInfo.characters[i]);
+            }
         }
     }
     
