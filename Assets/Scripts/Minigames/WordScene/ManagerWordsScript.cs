@@ -9,6 +9,7 @@ public class ManagerWordsScript : MonoBehaviour
 {
     public int penalty;
     public int reward;
+    public bool debugThisSceneMode;
     
     public GameObject wordPrefab;
     public GameObject tilePrefab;
@@ -202,16 +203,25 @@ public class ManagerWordsScript : MonoBehaviour
             TheEndTileScript.Instance.gameObject.GetComponentInChildren<Button>().onClick.AddListener(OnClick);
             if (HasWon())
             {
-                MainManager.Instance.Money += reward;
+                if (!debugThisSceneMode)
+                {
+                    MainManager.Instance.Money += reward;
+                    MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
+                }
+
                 TheEndTileScript.Instance.gameObject.GetComponentInChildren<Button>().GetComponentInChildren<Text>().text = "You have won!";
                 
             }
             else
             {
-                MainManager.Instance.Money -= penalty;
+                if (!debugThisSceneMode)
+                {
+                    MainManager.Instance.Money -= penalty;
+                    MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
+                }
+
                 TheEndTileScript.Instance.gameObject.GetComponentInChildren<Button>().GetComponentInChildren<Text>().text = "You have lost!";
             }
-            MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
             TheEndTileScript.Instance.gameObject.SetActive(true);
             Clear();
         }
