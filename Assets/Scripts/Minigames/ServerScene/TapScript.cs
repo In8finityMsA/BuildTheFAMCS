@@ -37,7 +37,7 @@ public class TapScript : MonoBehaviour
 
     void Start()
     {
-        acseleration = 0.5f;
+        acseleration = 0.3f;
         mouseDown = false;
         timeDown = 0;
         isEnding = false;
@@ -135,8 +135,9 @@ public class TapScript : MonoBehaviour
         {
             timing = 0;
             newTapSpeed = downCounter / acseleration;
+            downCounter = 0;
         }
-        
+
     }
 
     void OnMouseDown()
