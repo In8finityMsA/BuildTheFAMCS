@@ -9,7 +9,24 @@ using UnityEngine;
 public class MainManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    public static MainManager Instance { get; private set; }
+    private static MainManager instance;
+
+    public static MainManager Instance
+    {
+
+        get
+        {
+            if (instance == null)
+            {
+                instance = GameObject.FindObjectOfType<MainManager>();
+                DontDestroyOnLoad(instance);
+            }
+
+            return instance;
+        }
+
+        private set => instance = value;
+    }
     
     public List<RoomScriptableObject> roomsList;
     private Dictionary<RoomScriptableObject, int> rooms = new Dictionary<RoomScriptableObject, int>();
