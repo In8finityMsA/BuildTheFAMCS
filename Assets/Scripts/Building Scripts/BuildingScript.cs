@@ -8,7 +8,8 @@ public class BuildingScript : MonoBehaviour
 
     public BuildingScriptableObject buildingInfo;
     public GameObject floorPrefab;
-    public GameObject roomPrefab;
+    public GameObject dialogPanel;
+    public GameObject darkTint;
     void Start()
     {
         if (gameObject.transform.position == Vector3.zero)
@@ -30,6 +31,9 @@ public class BuildingScript : MonoBehaviour
 
             floorObject.GetComponent<FloorScript>().Init(floor);
         }
+        
+        dialogPanel.SetActive(false);
+        darkTint.SetActive(false);
     }
 
 }
