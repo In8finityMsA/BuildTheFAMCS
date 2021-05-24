@@ -45,11 +45,10 @@ public class TeacherScript : MonoBehaviour
         IsWatchingHandler += UIIsWatching;
         IsNotWatchingHandler += UIIsNotWatching;
         IsStartWatchingHandler += UIIsTurning;
-        movement = 0.01f;
 
-        //??? can we find it dynamically?
-        animationStartTime = (float)2;
-        animationStopTime = (float)2;
+        movement = 0.01f;//how fast he is moving (from 0.01 to 0.05)
+        animationStartTime = (float)3;//how fast should teacher turn after ! (from 1 to 3)
+        animationStopTime = (float)2;// no sense in it
         isAngry = false;
 
         isTurning = false;
@@ -108,7 +107,6 @@ public class TeacherScript : MonoBehaviour
             }
             else if (time + animationStartTime >= ManagerScript.FREQUENCY)
             {
-                //Debug.Log($"time minused. Time {time}");
                 time = ManagerScript.FREQUENCY - animationStartTime;
                 IsStartWatchingHandler();
                 isTurning = true;
@@ -150,9 +148,6 @@ public class TeacherScript : MonoBehaviour
         animator.SetBool("IsWatching", false);
         animator.SetBool("IsNotWatching", false);
         GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 1.0f);
-
-        //TODO
-        //place to start animation of turning teacher (if we have, else nothing)
     }
 
 
@@ -163,8 +158,6 @@ public class TeacherScript : MonoBehaviour
         animator.SetBool("IsWatching", false);
         Debug.Log("Busy!");
         GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f);
-        //TODO
-        //if we have animation of turning teacher than put here start of it, else put a picture of not watching teacher
     }
 
     void UIIsWatching()
@@ -174,15 +167,13 @@ public class TeacherScript : MonoBehaviour
         animator.SetBool("IsNotWatching", false);
         Debug.Log("Watching!");
         GetComponent<SpriteRenderer>().color = new Color(1.0f, 0f, 0f);
-        //TODO
-        //if we have no animation of turning teacher than put picture of teacher watching here
     }
 
     public void TeacherAngry()
     {
         isAngry = true;
         //TODO animation teacher is angry when saw cheating. Time less than animation of end
-        GetComponent<SpriteRenderer>().color = new Color(0.2f, 0.2f, 0.2f);
+        GetComponent<SpriteRenderer>().color = new Color(1f, 0f, 0f);
     }
 }
 
