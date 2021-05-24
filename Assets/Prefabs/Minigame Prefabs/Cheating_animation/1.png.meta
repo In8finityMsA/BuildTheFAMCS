@@ -1,5 +1,17 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+<<<<<<< HEAD
+guid: aa70b4b085e95eb41a383a7f03de3b70
+=======
+<<<<<<< HEAD
+guid: 9d98e1930aa6f244184056351bad769d
+=======
+guid: bd39c202522a22b42b0545ad612239e8
+>>>>>>> a069eb136ca2d5a86045d044d946832fc47a8791
+>>>>>>> 4d5e7813ac5d484396ed3e3870e25900cb2ccb6f
+=======
 guid: 8baeef7ea6704c44095da06bd5504697
+>>>>>>> parent of 4cb357b (3rd frame chaeting)
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
