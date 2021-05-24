@@ -41,6 +41,12 @@ public class MainManager : MonoBehaviour
     private bool[] roomsUnlocked;
     private bool[] scenesCompleted;
     
+    private void Awake()
+    {
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(this);
+    }
 
     public int Money
     {
@@ -129,18 +135,8 @@ public class MainManager : MonoBehaviour
         }
     }
 
-    void Awake()
+    void Start()
     {
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-        DontDestroyOnLoad(this);
-
         roomsUnlocked = new bool[roomsList.Count];
         money = defaultMoney;
         scenesCompleted = new bool[scenesList.Count];
@@ -193,5 +189,10 @@ public class MainManager : MonoBehaviour
         SaveScript.SaveRooms(roomsUnlocked);
         SaveScript.SaveScenes(scenesCompleted);
     }
-    
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
 }
