@@ -70,7 +70,7 @@ public class RoomScript : MonoBehaviour
     {
         if (System.DateTime.Now - time < new TimeSpan(0, 0, 1))
         {
-            Debug.Log($"Room Clicked! floor: {roomInfo.floor}, index: {roomInfo.indexInFloor}.");
+            //Debug.Log($"Room Clicked! floor: {roomInfo.floor}, index: {roomInfo.indexInFloor}.");
             if (MainManager.Instance.Money >= roomInfo.costToBuild && roomInfo.isUnlocked == false)
             {
                 RoomUnlock();
