@@ -12,5 +12,6 @@ public class CharacterScriptableObject : ScriptableObject
     public string jsonFilename;
     public Sprite sprite;
     public List<string> minigameSceneNames;
-    
+    public bool hasQuest;
+
 }

@@ -13,7 +13,7 @@ public class MainManager : MonoBehaviour
     
     public List<RoomScriptableObject> roomsList;
     private Dictionary<RoomScriptableObject, int> rooms = new Dictionary<RoomScriptableObject, int>();
-    public List<string> scenesList = new List<string>() {"BugScene", "CheatScene", "LatenessScene", "ServerScene", "WordScene"};
+    public List<string> scenesList = new List<string>() {"BugsScene", "CheatScene", "LatenessScene", "ServerScene", "WordScene"};
     private Dictionary<string, int> scenes = new Dictionary<string, int>();
     
     public bool useSaves;
@@ -42,6 +42,10 @@ public class MainManager : MonoBehaviour
             roomsUnlocked[rooms[room]] = unlockState;
             SaveScript.SaveRooms(roomsUnlocked);
         }
+        else
+        {
+            Debug.Log("No such room found");
+        }
     }
 
     /**
@@ -62,6 +66,23 @@ public class MainManager : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            Debug.Log("No such index found");
+        }
+    }
+    
+    public bool GetRoomStatus(RoomScriptableObject room)
+    {
+        if (rooms.ContainsKey(room))
+        {
+            return roomsUnlocked[rooms[room]];
+        }
+        else
+        {
+            Debug.Log("No such room found");
+            throw new ArgumentException();
+        }
     }
 
     public void SetSceneCompleted(string scene, bool completedState)
@@ -70,6 +91,23 @@ public class MainManager : MonoBehaviour
         {
             scenesCompleted[scenes[scene]] = completedState;
             SaveScript.SaveScenes(scenesCompleted);
+        }
+        else
+        {
+            Debug.Log("No such scene found");
+        }
+    }
+
+    public bool GetSceneStatus(string scene)
+    {
+        if (scenes.ContainsKey(scene))
+        {
+            return scenesCompleted[scenes[scene]];
+        }
+        else
+        {
+            Debug.Log("No such scene found");
+            throw new ArgumentException();
         }
     }
 
@@ -82,7 +120,7 @@ public class MainManager : MonoBehaviour
     {
         roomsUnlocked = new bool[roomsList.Count];
         money = defaultMoney;
-        scenesCompleted = new bool[roomsList.Count];
+        scenesCompleted = new bool[scenesList.Count];
 
         if (resetSavesOnStartup)
         {
@@ -114,7 +152,7 @@ public class MainManager : MonoBehaviour
         index = 0;
         foreach (var scene in scenesList)
         {
-            scenes.Add(scene, index);
+            scenes.Add(scene, index++);
         }
     }
 

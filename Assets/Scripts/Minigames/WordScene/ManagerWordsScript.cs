@@ -211,6 +211,7 @@ public class ManagerWordsScript : MonoBehaviour
                 MainManager.Instance.Money -= penalty;
                 TheEndTileScript.Instance.gameObject.GetComponentInChildren<Button>().GetComponentInChildren<Text>().text = "You have lost!";
             }
+            MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
             TheEndTileScript.Instance.gameObject.SetActive(true);
             Clear();
         }

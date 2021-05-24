@@ -54,6 +54,7 @@ public class ManagerScript : MonoBehaviour
         Clear();
         EndScript end = EndScript.Instance;
         MainManager.Instance.Money -= penalty;
+        MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
         end.gameObject.SetActive(true);
         end.btn.gameObject.GetComponentInChildren<Text>().text = "You've lost! The teacher saw you cheating!";
         end.btn.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(OnClick);             
@@ -95,6 +96,7 @@ public class ManagerScript : MonoBehaviour
         Clear();
         EndScript end = EndScript.Instance;
         MainManager.Instance.Money -= penalty;
+        MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
         end.gameObject.SetActive(true);
         end.btn.gameObject.GetComponentInChildren<Text>().text = "You've lost! The lesson is over!";
             
@@ -185,6 +187,7 @@ public class ManagerScript : MonoBehaviour
         Clear();
         EndScript end = EndScript.Instance;
         MainManager.Instance.Money += reward;
+        MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
         end.gameObject.SetActive(true);
         end.btn.gameObject.GetComponentInChildren<Text>().text = "You have won!";
 

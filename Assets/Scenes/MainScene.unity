@@ -98,12 +98,8 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-<<<<<<< HEAD
   m_LightingSettings: {fileID: 4890085278179872738, guid: 2dbd9fd1716e54e4a9eca9325310f952,
     type: 2}
-=======
-  m_LightingSettings: {fileID: 1800123337}
->>>>>>> 4d5e7813ac5d484396ed3e3870e25900cb2ccb6f
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2114,11 +2110,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-<<<<<<< HEAD
   m_PresetInfoIsWorld: 1
-=======
-  m_PresetInfoIsWorld: 0
->>>>>>> 4d5e7813ac5d484396ed3e3870e25900cb2ccb6f
 --- !u!223 &647446784
 Canvas:
   m_ObjectHideFlags: 0

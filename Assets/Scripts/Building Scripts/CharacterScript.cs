@@ -49,7 +49,16 @@ public class CharacterScript : MonoBehaviour
     {
         if (characterInfo.minigameSceneNames.Count > 0)
         {
-            SceneManager.LoadScene(characterInfo.minigameSceneNames[0]);
+            var minigame = characterInfo.minigameSceneNames[0];
+            if (!MainManager.Instance.GetSceneStatus(minigame))
+            {
+                SceneManager.LoadScene(minigame);
+            }
+            else
+            {
+                Debug.Log("You have already done this minigame.");
+            }
+            
         }
         else
         {

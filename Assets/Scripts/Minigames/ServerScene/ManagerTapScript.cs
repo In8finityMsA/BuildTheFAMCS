@@ -81,6 +81,7 @@ public class ManagerTapScript : MonoBehaviour
     void UITheEndWon()
     {
         MainManager.Instance.Money += reward;
+        MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
         TheEndScript.Instance.gameObject.SetActive(true);
 
         TheEndScript.Instance.btn.gameObject.GetComponentInChildren<Text>().text = "You won!";
@@ -91,6 +92,7 @@ public class ManagerTapScript : MonoBehaviour
     void UITheEndLose()
     {
         MainManager.Instance.Money -= penalty;
+        MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
         TheEndScript.Instance.gameObject.SetActive(true);
 
         TheEndScript.Instance.btn.gameObject.GetComponentInChildren<Text>().text = "You lost!";
