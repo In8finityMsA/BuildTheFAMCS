@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class PhoneScript : MonoBehaviour
 {
     public bool mouseDown = false;
+    public Animator animator;
+    public bool IsCheating = false;
 
     //progress for this object (pupil)
     public float progress;
@@ -50,6 +52,7 @@ public class PhoneScript : MonoBehaviour
 
 
         isCheating = false;
+        animator.SetBool("IsCheating", false);
         cheated = false;
         isEnding = false;
         progress = 0;
@@ -69,6 +72,7 @@ public class PhoneScript : MonoBehaviour
             {
                 cheated = true;
                 isCheating = false;
+                animator.SetBool("IsCheating", false);
                 OnCheatedHandler();
             }
             if (mouseDown && !cheated)
@@ -125,17 +129,20 @@ public class PhoneScript : MonoBehaviour
     void BackendCheating()
     {
         isCheating = true;
+        animator.SetBool("IsCheating", true);
     }
 
     void BackendWaitToCheat()
     {
         isCheating = false;
+        animator.SetBool("IsCheating", false);
     }
 
     void UICheating()
     {
         //TODO:
         //show somehow that person is cheating
+        animator.SetBool("IsCheating", true);
         GetComponent<SpriteRenderer>().color = new Color(0f, 1.0f, 0f);
     }
 
@@ -143,6 +150,7 @@ public class PhoneScript : MonoBehaviour
     {
         //TODO:
         //show that person is not cheating
+        animator.SetBool("IsCheating", false);
         GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f);
     }
 
