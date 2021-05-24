@@ -6,6 +6,7 @@ public class TeacherScript : MonoBehaviour
 {
     // time after last wathcing started
     public float time;
+    public Animator animator;
 
     // how much time left for watching
     public float timeWatching = 0;
@@ -30,6 +31,14 @@ public class TeacherScript : MonoBehaviour
 
     public delegate void OnNotWatching();
     public event OnNotWatching IsNotWatchingHandler;
+
+    private bool faceLeft = false;
+    void flip()
+    {
+        faceLeft = !faceLeft;
+        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+    }
+
 
     void Start()
     {
@@ -118,6 +127,10 @@ public class TeacherScript : MonoBehaviour
             movement = -movement;
         }
         gameObject.transform.position = new Vector3(gameObject.transform.position.x + movement, gameObject.transform.position.y, 0);
+        if (movement > 0 && !faceLeft)
+            flip();
+        else if (movement < 0 && faceLeft)
+            flip();
     }
 
     void GenerateWatchingPeriod()
@@ -127,15 +140,27 @@ public class TeacherScript : MonoBehaviour
         temp += ManagerScript.FREQUENCY - timeWatching;
     }
 
+    public bool IsNotWatching = false;
+    public bool IsWatching = false;
+    public bool IsTurning = false;
+
     void UIIsTurning()
     {
+        animator.SetBool("IsTurning", true);
+        animator.SetBool("IsWatching", false);
+        animator.SetBool("IsNotWatching", false);
         GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 1.0f);
+
         //TODO
         //place to start animation of turning teacher (if we have, else nothing)
     }
 
+
     void UIIsNotWatching()
     {
+        animator.SetBool("IsNotWatching", true);
+        animator.SetBool("IsTurning", false);
+        animator.SetBool("IsWatching", false);
         Debug.Log("Busy!");
         GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f);
         //TODO
@@ -144,6 +169,9 @@ public class TeacherScript : MonoBehaviour
 
     void UIIsWatching()
     {
+        animator.SetBool("IsWatching", true);
+        animator.SetBool("IsTurning", false);
+        animator.SetBool("IsNotWatching", false);
         Debug.Log("Watching!");
         GetComponent<SpriteRenderer>().color = new Color(1.0f, 0f, 0f);
         //TODO
@@ -157,3 +185,4 @@ public class TeacherScript : MonoBehaviour
         GetComponent<SpriteRenderer>().color = new Color(0.2f, 0.2f, 0.2f);
     }
 }
+
