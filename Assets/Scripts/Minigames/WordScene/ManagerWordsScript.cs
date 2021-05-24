@@ -32,8 +32,10 @@ public class ManagerWordsScript : MonoBehaviour
     {
 
         SpriteRenderer spriteRenderer = background.GetComponent<SpriteRenderer>();
+        Debug.Log(spriteRenderer.ToString());
         float cameraHeight = Camera.main.orthographicSize * 2;
         Vector2 cameraSize = new Vector2(Camera.main.aspect * cameraHeight, cameraHeight);
+        Debug.Log("good");
         Vector2 spriteSize = spriteRenderer.sprite.bounds.size;
         Vector2 scale = transform.localScale;
         scale.x *= cameraSize.x / spriteSize.x;

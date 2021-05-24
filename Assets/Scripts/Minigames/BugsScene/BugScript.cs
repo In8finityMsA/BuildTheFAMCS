@@ -5,8 +5,8 @@ using UnityEngine;
 public class BugScript : MonoBehaviour
 {
     public Rigidbody2D rb;
-    public float accelerationTime = 5f;
-    public float maxSpeed = 10f;
+    public float accelerationTime = 0.1f;
+    public float maxSpeed = 50f;
     private Vector2 movement;
     private float timeLeft;
 
@@ -19,7 +19,7 @@ public class BugScript : MonoBehaviour
         timeLeft -= Time.deltaTime;
         if (timeLeft <= 0)
         {
-            movement = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+            movement = new Vector2(Random.Range(-7f, 7f), Random.Range(-7f, 7f));
             timeLeft += accelerationTime;
         }
     }
