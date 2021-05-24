@@ -21,7 +21,6 @@ public class TapScript : MonoBehaviour
     public float curLoad;
 
     public delegate void OnTapSpeedChanged();
-    public event OnTapSpeedChanged TapSpeedChangedHandler;
 
     public delegate void OnStart();
     public event OnStart AnimationStartHandler;
@@ -45,7 +44,7 @@ public class TapScript : MonoBehaviour
         //params
         A = 5;
         B = 6;
-        delta = (float)0.01;
+        delta = (float)0.05;
 
         ManagerTapScript.Instance.tap = this;
     }
