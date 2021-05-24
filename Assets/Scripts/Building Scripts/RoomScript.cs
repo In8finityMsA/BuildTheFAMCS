@@ -22,6 +22,11 @@ public class RoomScript : MonoBehaviour
         {
             Debug.Log(character);
         }
+
+        if (roomInfo.isUnlocked)
+        {
+            DrawCharacters();
+        }
     }
 
     private void SetSprite()
@@ -33,12 +38,16 @@ public class RoomScript : MonoBehaviour
         boxCollider.size = boxCollider.transform.InverseTransformVector(spriteRenderer.bounds.size);
     }
 
-    void RoomUnlock()
+    private void RoomUnlock()
     {
         MainManager.Instance.Money -= roomInfo.costToBuild;
         MainManager.Instance.SetRoomUnlocked(roomInfo, true);
         SetSprite();
+        DrawCharacters();
+    }
 
+    private void DrawCharacters()
+    {
         for (int i = 0; i < roomInfo.characters.Count; i++)
         {
             var characterObject = Instantiate(characterPrefab, gameObject.transform.position, Quaternion.identity);

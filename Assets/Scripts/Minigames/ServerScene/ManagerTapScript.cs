@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class ManagerTapScript : MonoBehaviour
 {
+    
+    public int penalty;
+    public int reward;
     public static ManagerTapScript Instance { get; private set; }
     // Start is called before the first frame update
 
@@ -77,6 +80,7 @@ public class ManagerTapScript : MonoBehaviour
     }
     void UITheEndWon()
     {
+        MainManager.Instance.Money += reward;
         TheEndScript.Instance.gameObject.SetActive(true);
 
         TheEndScript.Instance.btn.gameObject.GetComponentInChildren<Text>().text = "You won!";
@@ -86,6 +90,7 @@ public class ManagerTapScript : MonoBehaviour
 
     void UITheEndLose()
     {
+        MainManager.Instance.Money -= penalty;
         TheEndScript.Instance.gameObject.SetActive(true);
 
         TheEndScript.Instance.btn.gameObject.GetComponentInChildren<Text>().text = "You lost!";

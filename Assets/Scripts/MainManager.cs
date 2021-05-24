@@ -10,15 +10,20 @@ public class MainManager : MonoBehaviour
 {
     // Start is called before the first frame update
     public static MainManager Instance { get; set; }
+    
     public List<RoomScriptableObject> roomsList;
-    public Dictionary<RoomScriptableObject, int> rooms = new Dictionary<RoomScriptableObject, int>();
-    private int money;
-    private bool[] roomsUnlocked;
-    public SaveScript.SaveDataScenes scenesData;
-
+    private Dictionary<RoomScriptableObject, int> rooms = new Dictionary<RoomScriptableObject, int>();
+    public List<string> scenesList = new List<string>() {"BugScene", "CheatScene", "LatenessScene", "ServerScene", "WordScene"};
+    private Dictionary<string, int> scenes = new Dictionary<string, int>();
+    
     public bool useSaves;
     public bool resetSavesOnStartup;
+    public int defaultMoney;
     
+    private int money;
+    private bool[] roomsUnlocked;
+    private bool[] scenesCompleted;
+
     public int Money
     {
         get => money;
@@ -59,6 +64,15 @@ public class MainManager : MonoBehaviour
         }
     }
 
+    public void SetSceneCompleted(string scene, bool completedState)
+    {
+        if (scenes.ContainsKey(scene))
+        {
+            scenesCompleted[scenes[scene]] = completedState;
+            SaveScript.SaveScenes(scenesCompleted);
+        }
+    }
+
     private void Awake()
     {
         Instance = this;
@@ -67,8 +81,8 @@ public class MainManager : MonoBehaviour
     void Start()
     {
         roomsUnlocked = new bool[roomsList.Count];
-        money = 100;
-        scenesData = new SaveScript.SaveDataScenes();
+        money = defaultMoney;
+        scenesCompleted = new bool[roomsList.Count];
 
         if (resetSavesOnStartup)
         {
@@ -81,7 +95,7 @@ public class MainManager : MonoBehaviour
             {
                 money = SaveScript.LoadMoney();
                 roomsUnlocked = SaveScript.LoadRooms();
-                scenesData = SaveScript.LoadScenes();
+                scenesCompleted = SaveScript.LoadScenes();
             }
             catch (FileNotFoundException)
             {
@@ -90,11 +104,17 @@ public class MainManager : MonoBehaviour
         }
 
 
-        int i = 0;
+        int index = 0;
         foreach (var room in roomsList)
         {
-            rooms.Add(room, i);
-            room.isUnlocked = roomsUnlocked[i++];
+            rooms.Add(room, index);
+            room.isUnlocked = roomsUnlocked[index++];
+        }
+
+        index = 0;
+        foreach (var scene in scenesList)
+        {
+            scenes.Add(scene, index);
         }
     }
 
@@ -110,7 +130,7 @@ public class MainManager : MonoBehaviour
     {
         SaveScript.SaveMoney(money);
         SaveScript.SaveRooms(roomsUnlocked);
-        SaveScript.SaveScenes(scenesData);
+        SaveScript.SaveScenes(scenesCompleted);
     }
 
     // Update is called once per frame

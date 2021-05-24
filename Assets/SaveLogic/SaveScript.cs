@@ -9,13 +9,7 @@ namespace SaveLogic
         private static string pathRooms = Application.persistentDataPath + "/rooms.sav";
         private static string pathMoney = Application.persistentDataPath + "/money.sav";
         private static string pathScenes = Application.persistentDataPath + "/scenes.sav";
-        //private static int defualtMoney = 100;
-        [System.Serializable]
-        public class SaveDataScenes
-        {
-            public string[] scenes;
-            public bool[] isScenesCompleted;
-        }
+
         
         public static void SaveMoney(int money)
         {
@@ -27,7 +21,7 @@ namespace SaveLogic
             stream.Close();
         }
         
-        public static void SaveScenes(SaveDataScenes scenes)
+        public static void SaveScenes(bool[] scenes)
         {
             BinaryFormatter formatter = new BinaryFormatter();
             
@@ -64,7 +58,7 @@ namespace SaveLogic
             throw new FileNotFoundException();
         }
         
-        public static SaveDataScenes LoadScenes()
+        public static bool[] LoadScenes()
         {
             BinaryFormatter formatter = new BinaryFormatter();
 
@@ -72,7 +66,7 @@ namespace SaveLogic
             {
                 FileStream stream = new FileStream(pathScenes, FileMode.Open);
 
-                SaveDataScenes scenes = formatter.Deserialize(stream) as SaveDataScenes;
+                bool[] scenes = (bool[])formatter.Deserialize(stream);
                 stream.Close();
                 return scenes;
             }

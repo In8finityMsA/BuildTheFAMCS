@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class Manager : MonoBehaviour
 {
+    public int penalty;
+    public int reward;
+    
     public GameObject BaffPrefab;
     public GameObject DebaffPrefab;
 
@@ -22,8 +25,17 @@ public class Manager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {   
-        
+    {
+        RoomScriptableObject room = Resources.Load<RoomScriptableObject>("Room11.asset");
+        if (room != null)
+        {
+            Debug.Log("Not null");
+            Debug.Log(room.characters[0].name);
+        }
+        else
+        {
+            Debug.Log("Null");
+        }
         EndButton.gameObject.SetActive(false);
 
         BaffsToWin = CountBaffs;
@@ -53,6 +65,7 @@ public class Manager : MonoBehaviour
     {
         if (BaffsToWin == 0 && !IsLose)
         {
+            MainManager.Instance.Money += reward;
             IsWin = true;
             EndButton.GetComponentInChildren<Text>().text = "You have won!";
             EndButton.onClick.AddListener(OnClick);
@@ -60,6 +73,7 @@ public class Manager : MonoBehaviour
         }
         else if (IsLose && !IsWin)
         {
+            MainManager.Instance.Money -= penalty;
             EndButton.GetComponentInChildren<Text>().text = "You have lost!";
             EndButton.onClick.AddListener(OnClick);
             EndButton.gameObject.SetActive(true);
