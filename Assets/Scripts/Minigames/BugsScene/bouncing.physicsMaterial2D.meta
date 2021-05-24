@@ -1,8 +1,15 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Scripts/Minigames/BugsScene/bouncing.physicsMaterial2D.meta
 guid: a66ffad26d9231a459018039f8c1c0dd
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 6200000
+=======
+guid: ab2c6f8d8c24e8f4cbcbdd149a139ecb
+folderAsset: yes
+DefaultImporter:
+  externalObjects: {}
+>>>>>>> parent of 4cb357b (3rd frame chaeting):Assets/Prefabs/Minigame Prefabs/Cheating_animation.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 
