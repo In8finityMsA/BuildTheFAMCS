@@ -395,6 +395,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8af488c12eae8ba4a9e3a4b9e79c5722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  penalty: 0
+  reward: 0
   wordPrefab: {fileID: 7786914918137567200, guid: a0fdb0329ae9e024596e15b57ae02d22,
     type: 3}
   tilePrefab: {fileID: 7655605565276789565, guid: 54ed488d915ecc14282cdbc28a916125,
@@ -756,7 +758,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -10
   m_Sprite: {fileID: 21300000, guid: 1291b4091fc98334198201c8459dcbd2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
