@@ -9,24 +9,7 @@ using UnityEngine;
 public class MainManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    private static MainManager instance;
-
-    public static MainManager Instance
-    {
-
-        get
-        {
-            if (instance == null)
-            {
-                instance = GameObject.FindObjectOfType<MainManager>();
-                DontDestroyOnLoad(instance);
-            }
-
-            return instance;
-        }
-
-        private set => instance = value;
-    }
+    public static MainManager Instance { get; set; }
     
     public List<RoomScriptableObject> roomsList;
     private Dictionary<RoomScriptableObject, int> rooms = new Dictionary<RoomScriptableObject, int>();
@@ -40,7 +23,6 @@ public class MainManager : MonoBehaviour
     private int money;
     private bool[] roomsUnlocked;
     private bool[] scenesCompleted;
-    
 
     public int Money
     {
@@ -129,18 +111,13 @@ public class MainManager : MonoBehaviour
         }
     }
 
-    void Awake()
+    private void Awake()
     {
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        
         Instance = this;
-        DontDestroyOnLoad(gameObject);
-        DontDestroyOnLoad(this);
+    }
 
+    void Start()
+    {
         roomsUnlocked = new bool[roomsList.Count];
         money = defaultMoney;
         scenesCompleted = new bool[scenesList.Count];
@@ -193,5 +170,10 @@ public class MainManager : MonoBehaviour
         SaveScript.SaveRooms(roomsUnlocked);
         SaveScript.SaveScenes(scenesCompleted);
     }
-    
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
 }

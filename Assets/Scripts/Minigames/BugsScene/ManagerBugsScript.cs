@@ -8,7 +8,6 @@ public class ManagerBugsScript : MonoBehaviour
 {
     public int penalty;
     public int reward;
-    public bool debugThisSceneMode;
     
     Rect cameraRect;
     public GameObject background;
@@ -93,25 +92,16 @@ public class ManagerBugsScript : MonoBehaviour
             {
                 bugs[i].SetActive(false);
             }
-
-            if (!debugThisSceneMode)
-            {
-                MainManager.Instance.Money -= penalty;
-                MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
-            }
-
+            MainManager.Instance.Money -= penalty;
+            MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
             canv.gameObject.GetComponentInChildren<Button>().onClick.AddListener(OnClick);
             canv.gameObject.GetComponentInChildren<Button>().GetComponentInChildren<Text>().text = "You have lost!";
             canv.gameObject.SetActive(true);
         }
         if (bugs.Count == 0)
         {
-            if (!debugThisSceneMode)
-            {
-                MainManager.Instance.Money += reward;
-                MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
-            }
-
+            MainManager.Instance.Money += reward;
+            MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
             canv.gameObject.GetComponentInChildren<Button>().onClick.AddListener(OnClick);
             canv.gameObject.GetComponentInChildren<Button>().GetComponentInChildren<Text>().text = "You have won!";
             canv.gameObject.SetActive(true);

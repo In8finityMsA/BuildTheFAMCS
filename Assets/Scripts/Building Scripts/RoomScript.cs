@@ -18,8 +18,10 @@ public class RoomScript : MonoBehaviour
         
         SetSprite();
 
-        roomInfo.isUnlocked = MainManager.Instance.GetRoomStatus(roomInfo);
-        
+        foreach (var character in roomInfo.characters)
+        {
+            Debug.Log(character);
+        }
 
         if (roomInfo.isUnlocked)
         {
@@ -61,23 +63,14 @@ public class RoomScript : MonoBehaviour
 
     void OnMouseDown()
     {
-        //Debug.Log($"Room Clicked! floor: {roomInfo.floor}, index: {roomInfo.indexInFloor}.");
-        if (MainManager.Instance.Money >= roomInfo.costToBuild && roomInfo.isUnlocked == false)
-        {
-            RoomUnlock();
-            Debug.Log("Room is unlocked");
-        }
-        else if (roomInfo.isUnlocked == false)
-        {
-            Debug.Log("Room can't be unlocked. Not enough money.");
-        }
+        time = System.DateTime.Now;
     }
     
     void OnMouseUp()
     {
-        /*if (System.DateTime.Now - time < new TimeSpan(0, 0, 1))
+        if (System.DateTime.Now - time < new TimeSpan(0, 0, 1))
         {
-            //Debug.Log($"Room Clicked! floor: {roomInfo.floor}, index: {roomInfo.indexInFloor}.");
+            Debug.Log($"Room Clicked! floor: {roomInfo.floor}, index: {roomInfo.indexInFloor}.");
             if (MainManager.Instance.Money >= roomInfo.costToBuild && roomInfo.isUnlocked == false)
             {
                 RoomUnlock();
@@ -88,7 +81,7 @@ public class RoomScript : MonoBehaviour
                 Debug.Log("Room can't be unlocked. Not enough money.");
             }
             
-        }*/
+        }
     }
     
 }

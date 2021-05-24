@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 0
@@ -14,19 +14,19 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Minigames/LatenessScene.unity
     guid: 9162168f79f493d49ab25a9b7720476f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Minigames/ServerScene.unity
     guid: 4885e063a5f88b648a55a729fa046e66
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Minigames/WordScene.unity
     guid: 2695286a452a1ca40b949c045da71949
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Minigames/BugsScene.unity
     guid: 00501715d13fd48489f5af0d253a047c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Minigames/CheatScene.unity
     guid: e4547fcdfa6ded248b0e1c4309333167
   - enabled: 1

@@ -22,10 +22,12 @@ public class FloorScript : MonoBehaviour
         foreach (var room in floorInfo.rooms)
         {
             var roomObject = Instantiate(roomPrefab, new Vector3(), Quaternion.identity);
+            //room.height = floorInfo.height;
             room.indexInFloor = roomAmount++;
             room.floor = floorInfo.floorNumber;
+            //var width = room.underConstructionSprite.bounds.size.x * roomObject.transform.localScale.x;
             var width = room.constructedSprite.bounds.size.x;
-            //Debug.Log($"Sprite size x: {room.constructedSprite.bounds.size.x}, y: {room.constructedSprite.bounds.size.y}. Floor num: {floorInfo.floorNumber}, room: {roomAmount}. Current width: {currentWidth}.");
+            Debug.Log($"Sprite size x: {room.constructedSprite.bounds.size.x}, y: {room.constructedSprite.bounds.size.y}. Floor num: {floorInfo.floorNumber}, room: {roomAmount}. Current width: {currentWidth}.");
             
             roomObject.transform.SetParent(gameObject.transform);
             roomObject.transform.localPosition = new Vector3(currentWidth + room.constructedSprite.bounds.size.x / 2, 0, 0);
