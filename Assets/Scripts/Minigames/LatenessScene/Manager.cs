@@ -8,6 +8,7 @@ public class Manager : MonoBehaviour
 {
     public int penalty;
     public int reward;
+    public bool debugThisSceneMode;
     
     public GameObject BaffPrefab;
     public GameObject DebaffPrefab;
@@ -65,9 +66,12 @@ public class Manager : MonoBehaviour
     {
         if (BaffsToWin == 0 && !IsLose)
         {
-            MainManager.Instance.Money += reward;
-            Debug.Log(gameObject.scene.name);
-            MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
+            if (!debugThisSceneMode)
+            {
+                MainManager.Instance.Money += reward;
+                MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
+            }
+
             IsWin = true;
             EndButton.GetComponentInChildren<Text>().text = "You have won!";
             EndButton.onClick.AddListener(OnClick);
@@ -75,9 +79,12 @@ public class Manager : MonoBehaviour
         }
         else if (IsLose && !IsWin)
         {
-            MainManager.Instance.Money -= penalty;
-            Debug.Log(gameObject.scene.name);
-            MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
+            if (!debugThisSceneMode)
+            {
+                MainManager.Instance.Money -= penalty;
+                MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
+            }
+
             EndButton.GetComponentInChildren<Text>().text = "You have lost!";
             EndButton.onClick.AddListener(OnClick);
             EndButton.gameObject.SetActive(true);
