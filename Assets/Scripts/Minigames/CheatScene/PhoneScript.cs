@@ -9,6 +9,7 @@ public class PhoneScript : MonoBehaviour
     public bool mouseDown = false;
     public Animator animator;
     public bool IsCheating = false;
+    public bool FinCheating = false;
 
     //progress for this object (pupil)
     public float progress;
@@ -54,6 +55,7 @@ public class PhoneScript : MonoBehaviour
         isCheating = false;
         animator.SetBool("IsCheating", false);
         cheated = false;
+        animator.SetBool("FinCheating", false);
         isEnding = false;
         progress = 0;
         timerOfTheEnd = 0;
@@ -71,6 +73,7 @@ public class PhoneScript : MonoBehaviour
             if (progress >= ManagerScript.ENOUGH && !cheated)
             {
                 cheated = true;
+                animator.SetBool("FinCheating", true);
                 isCheating = false;
                 animator.SetBool("IsCheating", false);
                 OnCheatedHandler();
