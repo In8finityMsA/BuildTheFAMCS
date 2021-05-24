@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,9 +13,11 @@ public class ManagerScript : MonoBehaviour
     //in inspector
     public GameObject prefab;
 
+    //in inspector
     public GameObject background;
 
     public TeacherScript teacher;
+
     public Rect cameraRect;
 
     //singletone
@@ -53,10 +55,10 @@ public class ManagerScript : MonoBehaviour
 
         Clear();
         EndScript end = EndScript.Instance;
-        MainManager.Instance.Money -= penalty;
-        MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
+        //MainManager.Instance.Money -= penalty;
+        //MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
         end.gameObject.SetActive(true);
-        end.btn.gameObject.GetComponentInChildren<Text>().text = "You've lost! The teacher saw you cheating!";
+        end.btn.gameObject.GetComponentInChildren<Text>().text = "Препод вас запалил(";
         end.btn.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(OnClick);             
     }
 
@@ -95,11 +97,12 @@ public class ManagerScript : MonoBehaviour
     {
         Clear();
         EndScript end = EndScript.Instance;
-        MainManager.Instance.Money -= penalty;
-        MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
+        //MainManager.Instance.Money -= penalty;
+        //MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
+
+        //displaying end button
         end.gameObject.SetActive(true);
-        end.btn.gameObject.GetComponentInChildren<Text>().text = "You've lost! The lesson is over!";
-            
+        end.btn.gameObject.GetComponentInChildren<Text>().text = "Вы не успели списать! Пара кончилась(";    
         end.btn.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(OnClick);
     }
 
@@ -110,64 +113,67 @@ public class ManagerScript : MonoBehaviour
         cameraRect = new Rect(bottomLeft.x, bottomLeft.y, topRight.x - bottomLeft.x, topRight.y - bottomLeft.y);
 
 
-        //background.transform.position = new Vector3(cameraRect.x + cameraRect.width/2, cameraRect.y + cameraRect.height/2, 0);
-        ////background.transform.localScale = new Vector3(background.transform.lossyScale.x, background.transform.lossyScale.y, 0);
-        //background.transform.localScale = new Vector3(Screen.width / 847, Screen.height / 476, 0);
-        //Debug.Log(Screen.width + "ffffffffffff " + Screen.height  + "cccccccccc" + cameraRect.width + "ddddd" + cameraRect.height);
-        //Debug.Log(background.transform.lossyScale.x + "ffffffffffff " + background.transform.lossyScale.y + "cccccccccc" + cameraRect.width + "ddddd" + cameraRect.height);
 
-
+        //setting background boundaries
         SpriteRenderer spriteRenderer = background.GetComponent<SpriteRenderer>();
-
-
-        //setting background
         float cameraHeight = Camera.main.orthographicSize * 2;
         Vector2 cameraSize = new Vector2(Camera.main.aspect * cameraHeight, cameraHeight);
         Vector2 spriteSize = spriteRenderer.sprite.bounds.size;
         Vector2 scale = transform.localScale;
         scale.x *= cameraSize.x / spriteSize.x;        
         scale.y *= cameraSize.y / spriteSize.y;
-        background.transform.position = Vector2.zero; // Optional
+        background.transform.position = Vector2.zero;
         background.transform.localScale = scale;
 
 
-
+        //for singletone
         Instance = this;
+
+        //taking from params
         studentAmount = 2;
+
         PlaceStudents();
     }
 
     void PlaceStudents()
     {
-
-        if (studentAmount > 4)
+        if (studentAmount == 1)
         {
-            int first = studentAmount / 2;
-            int second = studentAmount - first;
-            float xCoordRow = (float)cameraRect.x + (float)cameraRect.width / 2 - first* 1.5f/ 2;
-            float yCoordFirst = (float)cameraRect.y + (float)cameraRect.height / 3;
-            float yCoordSecond = (float)cameraRect.y + (float)cameraRect.height / 6;
-
-            for (int i = 0; i < first; i++)
-            {
-                GameObject gameOb = Instantiate(prefab, new Vector3(xCoordRow + 2 * i, yCoordFirst, 0), Quaternion.identity);
-            }
-            xCoordRow = (float)cameraRect.x + (float)cameraRect.width / 2 - (second) * 1.5f/ 2f ;
-
-            for (int i = 0; i < second; i++)
-            {
-                GameObject gameOb = Instantiate(prefab, new Vector3(xCoordRow + 2 * i, yCoordSecond, 0), Quaternion.identity);
-            }
+            GameObject gameOb = Instantiate(prefab, new Vector3((float)cameraRect.x + (float)cameraRect.width / 2, (float)cameraRect.y + (float)cameraRect.height / 4, 0), Quaternion.identity);
         }
-        else
+        else if (studentAmount == 2)
         {
-            float xCoordRow = (float)cameraRect.x + (float)cameraRect.width / 2 - ((float)studentAmount * 1.5f) / 2f;
+            GameObject gameOb = Instantiate(prefab, new Vector3((float)cameraRect.x + (float)cameraRect.width / 2 - 1.75f, (float)cameraRect.y + (float)cameraRect.height / 4, 0), Quaternion.identity);
+            GameObject gameOb2 = Instantiate(prefab, new Vector3((float)cameraRect.x + (float)cameraRect.width / 2 + 1.75f, (float)cameraRect.y + (float)cameraRect.height / 4, 0), Quaternion.identity);
+        }
+        else if (studentAmount >= 3 && studentAmount <= 4)
+        {
+            float xCoordRow = (float)cameraRect.x + (float)cameraRect.width / 2 - ((float)studentAmount * 3f) / 2f + 0.75f;
             float yCoord = (float)cameraRect.y + (float)cameraRect.height / 4;
             for (int i = 0; i < studentAmount; i++)
             {
-                GameObject gameOb = Instantiate(prefab, new Vector3(xCoordRow + 2 * i, yCoord, 0), Quaternion.identity);
+                GameObject gameOb = Instantiate(prefab, new Vector3(xCoordRow + 3.5f * i, yCoord, 0), Quaternion.identity);
             }
         }
+        else //normally we have from 1 to 4 students
+        {
+            int first = studentAmount / 2;
+            int second = studentAmount - first;
+            float xCoordRow = (float)cameraRect.x + (float)cameraRect.width / 2 - first* 2.5f/ 2;
+            float yCoordFirst = (float)cameraRect.y + (float)cameraRect.height / 2f;
+            float yCoordSecond = (float)cameraRect.y + (float)cameraRect.height / 5f;
+
+            for (int i = 0; i < first; i++)
+            {
+                GameObject gameOb = Instantiate(prefab, new Vector3(xCoordRow + 3.5f * i, yCoordFirst, 0), Quaternion.identity);
+            }
+            xCoordRow = (float)cameraRect.x + (float)cameraRect.width / 2 - (second) * 2.5f/ 2f ;
+
+            for (int i = 0; i < second; i++)
+            {
+                GameObject gameOb = Instantiate(prefab, new Vector3(xCoordRow + 3.5f * i, yCoordSecond, 0), Quaternion.identity);
+            }
+        }       
     }
         
 
@@ -176,25 +182,23 @@ public class ManagerScript : MonoBehaviour
         HasWon += UIHasWon;
         CurrentProgress = 0;
         teacherWatching = false;
-        students = new List<PhoneScript>();
-        
+        students = new List<PhoneScript>();      
     }
 
 
     void UIHasWon()
-    {
-        //TODO
+    {        
         Clear();
         EndScript end = EndScript.Instance;
-        MainManager.Instance.Money += reward;
-        MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
-        end.gameObject.SetActive(true);
-        end.btn.gameObject.GetComponentInChildren<Text>().text = "You have won!";
+        //MainManager.Instance.Money += reward;
+        //MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
 
+        //displaying end button
+        end.gameObject.SetActive(true);
+        end.btn.gameObject.GetComponentInChildren<Text>().text = "Вы сделали это!";
         end.btn.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(OnClick);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (CurrentProgress >= ENOUGH * studentAmount)
@@ -208,7 +212,6 @@ public class ManagerScript : MonoBehaviour
             {
                 if (item.isCheating)
                 {
-                    Debug.Log("Got you!");
                     item.Sucks();
                     teacher.TeacherAngry();                  
                 }         
