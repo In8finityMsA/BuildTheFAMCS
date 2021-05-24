@@ -45,8 +45,9 @@ public class CharacterScript : MonoBehaviour
         boxCollider.size = boxCollider.transform.InverseTransformVector(spriteRenderer.bounds.size);
     }
 
-    private void OnMouseDown()
+    void OnMouseDown()
     {
+        Debug.Log($"Character click: {characterInfo.name}");
         if (characterInfo.minigameSceneNames.Count > 0)
         {
             var minigame = characterInfo.minigameSceneNames[0];

@@ -9,6 +9,7 @@ public class ManagerScript : MonoBehaviour
 {
     public int penalty;
     public int reward;
+    public bool debugThisSceneMode;
     
     //in inspector
     public GameObject prefab;
@@ -55,8 +56,12 @@ public class ManagerScript : MonoBehaviour
 
         Clear();
         EndScript end = EndScript.Instance;
-        //MainManager.Instance.Money -= penalty;
-        //MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
+        if (!debugThisSceneMode)
+        {
+            MainManager.Instance.Money -= penalty;
+            MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
+        }
+
         end.gameObject.SetActive(true);
         end.btn.gameObject.GetComponentInChildren<Text>().text = "Препод вас запалил(";
         end.btn.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(OnClick);             
@@ -97,8 +102,11 @@ public class ManagerScript : MonoBehaviour
     {
         Clear();
         EndScript end = EndScript.Instance;
-        //MainManager.Instance.Money -= penalty;
-        //MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
+        if (!debugThisSceneMode)
+        {
+            MainManager.Instance.Money -= penalty;
+            MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
+        }
 
         //displaying end button
         end.gameObject.SetActive(true);
@@ -190,10 +198,12 @@ public class ManagerScript : MonoBehaviour
     {        
         Clear();
         EndScript end = EndScript.Instance;
-        //MainManager.Instance.Money += reward;
-        //MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
+        if (!debugThisSceneMode)
+        {
+            MainManager.Instance.Money += reward;
+            MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
+        }
 
-        //displaying end button
         end.gameObject.SetActive(true);
         end.btn.gameObject.GetComponentInChildren<Text>().text = "Вы сделали это!";
         end.btn.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(OnClick);
