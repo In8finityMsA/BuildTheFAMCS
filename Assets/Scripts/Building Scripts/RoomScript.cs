@@ -74,6 +74,11 @@ public class RoomScript : MonoBehaviour
 
     void OnMouseDown()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            Debug.Log("Clicked on UI");
+            return;
+        }
         startDrag = Camera.transform.position;
         if (EventSystem.current.IsPointerOverGameObject())
         {
@@ -87,7 +92,7 @@ public class RoomScript : MonoBehaviour
         endDrag = Camera.transform.position;
         if (startDrag == endDrag)
         {
-        if (EventSystem.current.IsPointerOverGameObject())
+            if (EventSystem.current.IsPointerOverGameObject())
             {
                 Debug.Log("Clicked on UI");
                 return;
