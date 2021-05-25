@@ -52,7 +52,7 @@ public class MainManager : MonoBehaviour
     private Text bigButtonText;
 
     private List<DialogPart> dialog;
-    private List<Button> buttons;
+    private List<Button> buttons = new List<Button>();
 
     public int Money
     {
@@ -204,6 +204,8 @@ public class MainManager : MonoBehaviour
 
     public void StartDialog(List<DialogPart> dialog)
     {
+        this.dialog = dialog;
+        
         dialogWindow.SetActive(true);
         darkTint.SetActive(true);
         currentIndex = 0;
@@ -223,8 +225,7 @@ public class MainManager : MonoBehaviour
             rightButtonObject.SetActive(true);
 
             rightButtonText.text = "Далее";
-            CheckActions(dialogPart);
-            
+
             rightButton.onClick.AddListener(() => SetCurrent(dialogPart.nextIndices[0]));
         }
         else
@@ -233,8 +234,6 @@ public class MainManager : MonoBehaviour
             {
                 bigButtonObject.SetActive(true);
                 
-                CheckActions(dialogPart);
-                
                 bigButtonText.text = dialogPart.replies[0];
                 bigButton.onClick.AddListener(() => SetCurrent(dialogPart.nextIndices[0]));
             }
@@ -242,8 +241,6 @@ public class MainManager : MonoBehaviour
             {
                 rightButtonObject.SetActive(true);
                 leftButtonObject.SetActive(true);
-
-                CheckActions(dialogPart);
                 
                 leftButtonText.text = dialogPart.replies[0];
                 leftButton.onClick.AddListener(() => SetCurrent(dialogPart.nextIndices[0]));
@@ -252,32 +249,48 @@ public class MainManager : MonoBehaviour
                 rightButton.onClick.AddListener(() => SetCurrent(dialogPart.nextIndices[1]));
             }
         }
+        CheckActions(dialogPart);
     }
 
     private void CheckActions(DialogPart dialogPart)
     {
         int buttonIndex = 0;
+        Debug.Log($"Current Index: {currentIndex}.");
         foreach (var actionString in dialogPart.actions)
         {
-            string[] actionWords = actionString.Split();
-            switch (actionWords[0])
+            Debug.Log($"Action: {actionString}, butIndex {buttonIndex}");
+            string[] actionWords = actionString.Split(' ');
+
+            if (actionWords.Length >= 1)
             {
-                case "scene":
+                switch (actionWords[0])
                 {
-                    if (actionWords.Length >= 2)
+                    case "scene":
                     {
-                        buttons[buttonIndex].onClick.AddListener(() => SetScene(actionWords[1]));
+                        if (actionWords.Length >= 2)
+                        {
+                            buttons[buttonIndex].onClick.AddListener(() => SetScene(actionWords[1]));
+                        }
+                        else
+                        {
+                            Debug.Log("Not enough parameters for action " + actionWords[0]);
+                        }
+
+                        break;
                     }
-                    break;
+                    case "buy":
+                    {
+                        break;
+                    }
+                    case "reputation":
+                    {
+                        break;
+                    }
                 }
-                case "buy":
-                {
-                    break;
-                }
-                case "reputation":
-                {
-                    break;
-                }
+            }
+            else
+            {
+                Debug.Log("No words in actions");
             }
 
             buttonIndex++;
@@ -306,6 +319,9 @@ public class MainManager : MonoBehaviour
         ResetVisibiltyAndListeneres();
         CameraMove.isCameraBlocked = false;
         dialogWindow.SetActive(false);
+        darkTint.SetActive(false);
+        currentIndex = 0;
+        dialog = null;
     }
     
     private void ResetVisibiltyAndListeneres()
