@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
+using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,7 +15,7 @@ public class CharacterScript : MonoBehaviour
 {
     private CharacterScriptableObject characterInfo;
     private bool isInit = false;
-    private List<MainManager.DialogPart> dialog = new List<MainManager.DialogPart>();
+    private List<MainManager.DialogPart> dialog;
 
 
     internal void Init(CharacterScriptableObject character)
@@ -26,6 +27,8 @@ public class CharacterScript : MonoBehaviour
         characterInfo.script = this;
         
         SetSprite();
+
+        dialog = JsonLoader.GetJsonArrayFromFile(characterInfo.jsonFilename);
 
         //Only for testing
         if (dialog == null)

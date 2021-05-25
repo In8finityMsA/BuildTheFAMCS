@@ -20,3 +20,5 @@ MonoBehaviour:
   underConstructionSprite: {fileID: 21300000, guid: ccf389a3d3d6fb84ba64853f3603e174,
     type: 3}
   constructedSprite: {fileID: 21300000, guid: 82afbcc6fb0d81045a355a85f05d6043, type: 3}
+  script: {fileID: 0}
+  jsonFilename: room13.json

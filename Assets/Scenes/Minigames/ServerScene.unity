@@ -484,8 +484,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 588152243ac14ff43bd5fb718826c023, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  penalty: 0
-  reward: 0
+  penalty: 5
+  reward: 1000
   tap: {fileID: 0}
   background: {fileID: 190142778}
   timeForGame: 0

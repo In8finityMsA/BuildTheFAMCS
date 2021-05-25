@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Martynenko
   m_EditorClassIdentifier: 
   name: Martynenko
-  jsonFilename: Martynenko
+  jsonFilename: WordMiniScript.json
   sprite: {fileID: 21300000, guid: 84ceb334992bb994abb0380f30c0b169, type: 3}
   minigameSceneNames:
   - WordScene

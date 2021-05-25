@@ -21,3 +21,4 @@ MonoBehaviour:
     type: 3}
   constructedSprite: {fileID: 21300000, guid: 19017bccebde2eb4ba321a3399a1080a, type: 3}
   script: {fileID: 0}
+  jsonFilename: room11.json

@@ -169,8 +169,16 @@ MonoBehaviour:
   - ServerScene
   - WordScene
   useSaves: 1
+<<<<<<< HEAD
   resetSavesOnStartup: 1
   defaultMoney: 1000
+=======
+  resetSavesOnStartup: 0
+  defaultMoney: 5000
+  defultReputation: 50
+  defaultRooms: 0000000000000000
+  defaultScenes: 0000000000
+>>>>>>> 3ce88622604812d56da8685da5f5f58db20852cd
   dialogWindow: {fileID: 936505167}
   darkTint: {fileID: 623691698}
   textObject: {fileID: 1619639327}

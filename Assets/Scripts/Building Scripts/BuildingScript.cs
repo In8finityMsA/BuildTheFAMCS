@@ -32,8 +32,6 @@ public class BuildingScript : MonoBehaviour
             floorObject.GetComponent<FloorScript>().Init(floor);
         }
         
-        dialogPanel.SetActive(false);
-        darkTint.SetActive(false);
     }
 
 }

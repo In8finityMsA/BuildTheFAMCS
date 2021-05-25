@@ -17,4 +17,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0abe31dc0d0ac7e408717d0a4381e92c, type: 2}
   - {fileID: 11400000, guid: 6e62813c9d5e09742970060ab201415f, type: 2}
   - {fileID: 11400000, guid: 2132f062a3a8c7743853f13fa1d48871, type: 2}
-  startPosition: {x: 0, y: -1.4, z: 0}
+  startPosition: {x: 0, y: -1.45, z: 0}

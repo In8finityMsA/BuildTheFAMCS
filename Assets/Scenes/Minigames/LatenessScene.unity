@@ -414,7 +414,7 @@ SpriteRenderer:
   m_Size: {x: 9.81, y: 7.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!50 &372833824
@@ -975,8 +975,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84b23bf704d229a468eaaa501463e8e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  penalty: 0
-  reward: 0
+  penalty: 5
+  reward: 1000
   BaffPrefab: {fileID: 2744898576943315315, guid: 3a0d0932cf11a2940b16ece8af4c1594,
     type: 3}
   DebaffPrefab: {fileID: 824658121111905792, guid: 7f188fda83a620440b03137b09380071,

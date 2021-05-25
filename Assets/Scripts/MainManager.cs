@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.IO;
+using DefaultNamespace;
 using SaveLogic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -22,9 +23,14 @@ public class MainManager : MonoBehaviour
     
     public bool useSaves;
     public bool resetSavesOnStartup;
+    
     public int defaultMoney;
+    public int defultReputation;
+    public bool[] defaultRooms = new bool[8];
+    public bool[] defaultScenes = new bool[5];
     
     private int money;
+    private int reputation;
     private bool[] roomsUnlocked;
     private bool[] scenesCompleted;
     
@@ -55,6 +61,12 @@ public class MainManager : MonoBehaviour
 
     private List<DialogPart> dialog;
     private List<Button> buttons = new List<Button>();
+    
+    public delegate void MoneyDelegate(int money);
+    public event MoneyDelegate OnMoneyChange;
+    
+    public delegate void ReputationDelegate(int reputation);
+    public event ReputationDelegate OnReputationChange;
 
     public int Money
     {
@@ -63,6 +75,18 @@ public class MainManager : MonoBehaviour
         {
             SaveScript.SaveMoney(value);
             money = value;
+            OnMoneyChange?.Invoke(money);
+        }
+    }
+    
+    public int Reputation
+    {
+        get => reputation;
+        set
+        {
+            SaveScript.SaveReputation(value);
+            reputation = value;
+            OnReputationChange?.Invoke(reputation);
         }
     }
     
@@ -167,16 +191,18 @@ public class MainManager : MonoBehaviour
         money = defaultMoney;
         scenesCompleted = new bool[scenesList.Count];
 
-        if (resetSavesOnStartup)
+        if (newGame)
         {
-            Save();
+            ResetSaves();
         }
+        
         
         if (useSaves)
         {
             try
             {
-                money = SaveScript.LoadMoney();
+                Money = SaveScript.LoadMoney();
+                Reputation = SaveScript.LoadMoney();
                 roomsUnlocked = SaveScript.LoadRooms();
                 scenesCompleted = SaveScript.LoadScenes();
             }
@@ -199,6 +225,9 @@ public class MainManager : MonoBehaviour
         {
             scenes.Add(scene, index++);
         }
+
+        OnMoneyChange += EndGame;
+        OnReputationChange += EndGame;
         
         //Debug
         var darkTintButton = darkTint.GetComponent<Button>();
@@ -222,6 +251,18 @@ public class MainManager : MonoBehaviour
         dialogWindow.SetActive(false);
         darkTint.SetActive(false);
 
+        
+
+    }
+
+    private void Start()
+    {
+        if (newGame)
+        {
+            var dialogArray = JsonLoader.GetJsonArrayFromFile("StartScript.json");
+            newGame = false;
+            StartDialog(dialogArray);
+        }
     }
 
     public void StartDialog(List<DialogPart> dialog)
@@ -302,6 +343,33 @@ public class MainManager : MonoBehaviour
                     }
                     case "buy":
                     {
+                        if (actionWords.Length >= 3)
+                        {
+                            if (Int32.TryParse(actionWords[1], out var price) &&
+                                Int32.TryParse(actionWords[2], out var index))
+                            {
+                                if (Money >= price)
+                                {
+                                    Money -= price;
+                                    var part = new DialogPart("С приобритением вас!", new List<string>(), new List<int>(){0}, new List<string>(){"", "close", ""});
+                                    foreach (var pair in rooms)
+                                    {
+                                        if (pair.Value == index)
+                                        {
+                                            pair.Key.script.RoomUnlock();
+                                            break;
+                                        }
+                                    }
+
+                                    buttons[buttonIndex].onClick.AddListener(() => DisplayPart(part));
+                                }
+                                else
+                                {
+                                    var part = new DialogPart("Недостаточно средств", new List<string>(), new List<int>(){0}, new List<string>(){"", "close", ""});
+                                    buttons[buttonIndex].onClick.AddListener(() => DisplayPart(part));
+                                }
+                            }
+                        }
                         break;
                     }
                     case "reputation":
@@ -380,8 +448,39 @@ public class MainManager : MonoBehaviour
     void Save()
     {
         SaveScript.SaveMoney(money);
+        SaveScript.SaveReputation(reputation);
         SaveScript.SaveRooms(roomsUnlocked);
         SaveScript.SaveScenes(scenesCompleted);
+    }
+
+    private void ResetSaves()
+    {
+        SaveScript.SaveMoney(defaultMoney);
+        SaveScript.SaveReputation(defultReputation);
+        SaveScript.SaveRooms(defaultRooms);
+        SaveScript.SaveScenes(defaultScenes);
+
+    }
+
+    private void EndGame(int param)
+    {
+        if (Money == 0)
+        {
+            var dialogArray = JsonLoader.GetJsonArrayFromFile("LowBudgetScript.json");
+            StartDialog(dialogArray);
+            SceneManager.LoadScene("MainMenu");
+            OnMoneyChange = null;
+            OnReputationChange = null;
+        }
+        else if (Reputation == 0)
+        {
+            var dialogArray = JsonLoader.GetJsonArrayFromFile("LowRepScript.json");
+            StartDialog(dialogArray);
+            SceneManager.LoadScene("MainMenu");
+            OnMoneyChange = null;
+            OnReputationChange = null;
+        }
+        
     }
 
     [System.Serializable]
