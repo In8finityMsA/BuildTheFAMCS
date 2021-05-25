@@ -169,7 +169,7 @@ MonoBehaviour:
   - ServerScene
   - WordScene
   useSaves: 1
-  resetSavesOnStartup: 0
+  resetSavesOnStartup: 1
   defaultMoney: 1000
   dialogWindow: {fileID: 936505167}
   darkTint: {fileID: 623691698}

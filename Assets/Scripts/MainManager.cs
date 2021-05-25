@@ -68,6 +68,8 @@ public class MainManager : MonoBehaviour
     
     public void SetRoomUnlocked(RoomScriptableObject room, bool unlockState)
     {
+        bool allUnlocked = true;
+
         if (rooms.ContainsKey(room))
         {
             room.isUnlocked = unlockState;
@@ -77,6 +79,20 @@ public class MainManager : MonoBehaviour
         else
         {
             Debug.Log("No such room found");
+        }
+
+        foreach (RoomScriptableObject tempRoom in roomsList)
+        {
+            if (!tempRoom.isUnlocked)
+            {
+                allUnlocked = false;
+                break;
+            }
+        }
+
+        if (allUnlocked)
+        {
+            Debug.Log("All rooms unlocked");
         }
     }
 
