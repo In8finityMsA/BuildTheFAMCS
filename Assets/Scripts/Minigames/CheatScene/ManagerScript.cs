@@ -10,6 +10,12 @@ public class ManagerScript : MonoBehaviour
     public int penalty;
     public int reward;
     
+    public bool IsPlaying = false;
+    public GameObject BackPanel;
+    public GameObject HintBox;
+
+    public GameObject EndButton;
+
     //in inspector
     public GameObject prefab;
 
@@ -54,12 +60,15 @@ public class ManagerScript : MonoBehaviour
     {
 
         Clear();
-        EndScript end = EndScript.Instance;
-        //MainManager.Instance.Money -= penalty;
-        //MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
-        end.gameObject.SetActive(true);
-        end.btn.gameObject.GetComponentInChildren<Text>().text = "Препод вас запалил(";
-        end.btn.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(OnClick);             
+        EndButton.SetActive(true);     
+        EndButton.GetComponentInChildren<Text>().text = "Препод вас спалил(";  
+    }
+
+    public void StartGame()
+    {
+        IsPlaying = true;
+        HintBox.SetActive(false);
+        BackPanel.GetComponent<UnityEngine.UI.Image>().color = Color.clear;
     }
 
     private void Clear()
@@ -74,6 +83,7 @@ public class ManagerScript : MonoBehaviour
 
     public void OnClick()
     {
+        Debug.Log("Click");
         if (!isClicked)
         {
             isClicked = true;
@@ -96,14 +106,12 @@ public class ManagerScript : MonoBehaviour
     public void EndOfTime()
     {
         Clear();
-        EndScript end = EndScript.Instance;
         //MainManager.Instance.Money -= penalty;
         //MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
 
         //displaying end button
-        end.gameObject.SetActive(true);
-        end.btn.gameObject.GetComponentInChildren<Text>().text = "Вы не успели списать! Пара кончилась(";    
-        end.btn.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(OnClick);
+        EndButton.SetActive(true);
+        EndButton.GetComponentInChildren<Text>().text = "Вы не успели списать! Пара кончилась(";    
     }
 
     void Awake()
@@ -189,14 +197,12 @@ public class ManagerScript : MonoBehaviour
     void UIHasWon()
     {        
         Clear();
-        EndScript end = EndScript.Instance;
         //MainManager.Instance.Money += reward;
         //MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
 
         //displaying end button
-        end.gameObject.SetActive(true);
-        end.btn.gameObject.GetComponentInChildren<Text>().text = "Вы сделали это!";
-        end.btn.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(OnClick);
+        EndButton.SetActive(true);
+        EndButton.GetComponentInChildren<Text>().text = "Вы сделали это!";
     }
 
     void Update()

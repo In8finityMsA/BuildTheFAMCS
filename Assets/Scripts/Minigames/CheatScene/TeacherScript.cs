@@ -61,74 +61,82 @@ public class TeacherScript : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {        
-        time += Time.deltaTime;
-        if (isAngry)
+    {   
+        if (GameObject.Find("ManagerEmpty").GetComponent<ManagerScript>().IsPlaying)
         {
-            return;
-        }
-        if (ManagerScript.ENOUGH * ManagerScript.Instance.studentAmount + delta <= timeToCheat)
-        {
-            ManagerScript.Instance.EndedTime();
-        }
-        if (ManagerScript.Instance.teacherWatching)
-        {
-            isTurning = false;
-            timeWatching -= Time.deltaTime;
-            if (timeWatching < 0)
+            time += Time.deltaTime;
+            if (isAngry)
             {
-                IsNotWatchingHandler();
-                ManagerScript.Instance.teacherWatching = false;
-                timeWatching = 0;
+                return;
             }
-        }
-        else if (isTurning)
-        {
-            if (time >= ManagerScript.FREQUENCY)
+            if (ManagerScript.ENOUGH * ManagerScript.Instance.studentAmount + delta <= timeToCheat)
             {
-                IsWatchingHandler();
+                ManagerScript.Instance.EndedTime();
+            }
+            if (ManagerScript.Instance.teacherWatching)
+            {
                 isTurning = false;
-                timeToCheat += temp;
-                temp = 0;
-                ManagerScript.Instance.teacherWatching = true;
-                time = 0;
-                GenerateWatchingPeriod();
+                timeWatching -= Time.deltaTime;
+                if (timeWatching < 0)
+                {
+                    IsNotWatchingHandler();
+                    ManagerScript.Instance.teacherWatching = false;
+                    timeWatching = 0;
+                }
             }
-        }
-        else
-        {
-            if (time >= ManagerScript.FREQUENCY)
+            else if (isTurning)
             {
-                IsWatchingHandler();
+                if (time >= ManagerScript.FREQUENCY)
+                {
+                    IsWatchingHandler();
+                    isTurning = false;
+                    timeToCheat += temp;
+                    temp = 0;
+                    ManagerScript.Instance.teacherWatching = true;
+                    time = 0;
+                    GenerateWatchingPeriod();
+                }
+            }
+            else
+            {
+                if (time >= ManagerScript.FREQUENCY)
+                {
+                    IsWatchingHandler();
 
-                ManagerScript.Instance.teacherWatching = true;
-                time = 0;
-                GenerateWatchingPeriod();             
-            }
-            else if (time + animationStartTime >= ManagerScript.FREQUENCY)
-            {
-                time = ManagerScript.FREQUENCY - animationStartTime;
-                IsStartWatchingHandler();
-                isTurning = true;
+                    ManagerScript.Instance.teacherWatching = true;
+                    time = 0;
+                    GenerateWatchingPeriod();             
+                }
+                else if (time + animationStartTime >= ManagerScript.FREQUENCY)
+                {
+                    time = ManagerScript.FREQUENCY - animationStartTime;
+                    IsStartWatchingHandler();
+                    isTurning = true;
+                }
             }
         }
+        
     }
 
     private void FixedUpdate()
     {
-        if (gameObject.transform.position.x < ManagerScript.Instance.cameraRect.x + ManagerScript.Instance.cameraRect.width / 4)
+        if (GameObject.Find("ManagerEmpty").GetComponent<ManagerScript>().IsPlaying)
         {
-            movement = -movement;
+            if (gameObject.transform.position.x < ManagerScript.Instance.cameraRect.x + ManagerScript.Instance.cameraRect.width / 4)
+            {
+                movement = -movement;
+            }
+            else if (gameObject.transform.position.x > ManagerScript.Instance.cameraRect.x + 3 * ManagerScript.Instance.cameraRect.width / 4)
+            {
+                movement = -movement;
+            }
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x + movement, gameObject.transform.position.y, 0);
+            if (movement > 0 && !faceLeft)
+                flip();
+            else if (movement < 0 && faceLeft)
+                flip();
         }
-        else if (gameObject.transform.position.x > ManagerScript.Instance.cameraRect.x + 3 * ManagerScript.Instance.cameraRect.width / 4)
-        {
-            movement = -movement;
-        }
-        gameObject.transform.position = new Vector3(gameObject.transform.position.x + movement, gameObject.transform.position.y, 0);
-        if (movement > 0 && !faceLeft)
-            flip();
-        else if (movement < 0 && faceLeft)
-            flip();
+        
     }
 
     void GenerateWatchingPeriod()

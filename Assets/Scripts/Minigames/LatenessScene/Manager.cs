@@ -13,16 +13,27 @@ public class Manager : MonoBehaviour
     public GameObject DebaffPrefab;
 
     public Button EndButton;
+    public GameObject HintBox;
+    public GameObject BackPanel;
 
     public int CountBaffs;
     public int CountDebaffs;
     
     public int BaffsToWin;
+    
 
+    public bool IsPlaying = false;
     public bool IsWin = false;
     public bool IsLose = false;
     private bool isClicked = false;
 
+    public void StartGame()
+    {
+        IsPlaying = true;
+        HintBox.SetActive(false);
+        BackPanel.GetComponent<Image>().color = Color.clear;
+    }
+    
     // Start is called before the first frame update
     void Start()
     {

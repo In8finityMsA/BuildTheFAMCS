@@ -350,7 +350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a381444cd0f33fd42bf482d9fe69485a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundSprite: {fileID: 0}
+  backgroundSprite: {fileID: 433437791}
   cameraObj: {fileID: 519420031}
   cameraSpeedDefaultX: 200
   cameraSpeedDefaultY: 100

@@ -68,30 +68,33 @@ public class PhoneScript : MonoBehaviour
 
     void Update()
     {
-        if (!isEnding)
+        if (GameObject.Find("ManagerEmpty").GetComponent<ManagerScript>().IsPlaying)
         {
-            if (progress >= ManagerScript.ENOUGH && !cheated)
+            if (!isEnding)
             {
-                cheated = true;
-                animator.SetBool("FinCheating", true);
-                isCheating = false;
-                animator.SetBool("IsCheating", false);
-                OnCheatedHandler();
+                if (progress >= ManagerScript.ENOUGH && !cheated)
+                {
+                    cheated = true;
+                    animator.SetBool("FinCheating", true);
+                    isCheating = false;
+                    animator.SetBool("IsCheating", false);
+                    OnCheatedHandler();
+                }
+                if (mouseDown && !cheated)
+                {
+                    ManagerScript.Instance.CurrentProgress += Time.deltaTime;
+                    progress += Time.deltaTime;
+                }          
             }
-            if (mouseDown && !cheated)
+            else
             {
-                ManagerScript.Instance.CurrentProgress += Time.deltaTime;
-                progress += Time.deltaTime;
-            }          
-        }
-        else
-        {
-            timerOfTheEnd -= Time.deltaTime;
-            if (timerOfTheEnd <= 0)
-            {
-                ManagerScript.Instance.EndHappened();
-            }
-        }       
+                timerOfTheEnd -= Time.deltaTime;
+                if (timerOfTheEnd <= 0)
+                {
+                    ManagerScript.Instance.EndHappened();
+                }
+            }       
+        }    
     }
 
     public void Cheated()
@@ -159,18 +162,22 @@ public class PhoneScript : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (!mouseDown && !cheated && !isEnding)
+        if (!mouseDown && !cheated && !isEnding && GameObject.Find("ManagerEmpty").GetComponent<ManagerScript>().IsPlaying)
         {
             //start of cheating animation
             mouseDown = true;
             OnCheatHandler();
             Debug.Log("cheating");
-        }      
+        }
+        else if(!GameObject.Find("ManagerEmpty").GetComponent<ManagerScript>().IsPlaying)
+        { 
+            GameObject.Find("ManagerEmpty").SendMessage("StartGame");
+        }
     }
 
     void OnMouseUp()
     {
-        if (mouseDown && !cheated && !isEnding)
+        if (mouseDown && !cheated && !isEnding && GameObject.Find("ManagerEmpty").GetComponent<ManagerScript>().IsPlaying)
         {
             //start of waiting to cheat animation
             mouseDown = false;
