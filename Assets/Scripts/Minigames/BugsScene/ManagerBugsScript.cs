@@ -11,6 +11,7 @@ public class ManagerBugsScript : MonoBehaviour
     
     Rect cameraRect;
     public GameObject background;
+    public GameObject resulttext;
     Canvas canv;
     public GameObject top;
     public float timer;
@@ -106,8 +107,11 @@ public class ManagerBugsScript : MonoBehaviour
                 }
                 MainManager.Instance.Money -= penalty;
                 MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
-    
-                EndButton.GetComponentInChildren<Button>().GetComponentInChildren<Text>().text = "Баги вас одолели(...";
+
+                resulttext.GetComponent<Text>().text = "Баги вас одолели(..." + '\n' + $"Ваши потерисоставили: {penalty}";
+
+
+                EndButton.GetComponentInChildren<Button>().GetComponentInChildren<Text>().text = "OK";
                 EndButton.SetActive(true);
             }
             if (bugs.Count == 0)
