@@ -50,7 +50,8 @@ public class MainManager : MonoBehaviour
     public GameObject leftButtonTextObject;
     public GameObject bigButtonTextObject;
     
-    
+    public GameObject moneyText, repText;
+
     private Text text;
     private Button rightButton;
     private Button leftButton;
@@ -73,6 +74,7 @@ public class MainManager : MonoBehaviour
         get => money;
         set
         {
+            moneyText.GetComponent<Text>().text = value.ToString();
             SaveScript.SaveMoney(value);
             money = value;
             OnMoneyChange?.Invoke(money);
@@ -84,6 +86,7 @@ public class MainManager : MonoBehaviour
         get => reputation;
         set
         {
+            repText.GetComponent<Text>().text = value.ToString();
             SaveScript.SaveReputation(value);
             reputation = value;
             OnReputationChange?.Invoke(reputation);

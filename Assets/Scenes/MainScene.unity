@@ -183,6 +183,8 @@ MonoBehaviour:
   rightButtonTextObject: {fileID: 169822159}
   leftButtonTextObject: {fileID: 1432174698}
   bigButtonTextObject: {fileID: 1241090398}
+  moneyText: {fileID: 897486526}
+  repText: {fileID: 1811919691}
 --- !u!4 &58167637
 Transform:
   m_ObjectHideFlags: 0
