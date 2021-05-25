@@ -334,7 +334,6 @@ public class MainManager : MonoBehaviour
                             {
                                 if (Money >= price)
                                 {
-                                    Money -= price;
                                     var part = new DialogPart("С приобритением вас!", new List<string>(), new List<int>(){0}, new List<string>(){"", "close", ""});
                                     foreach (var pair in rooms)
                                     {
@@ -345,6 +344,7 @@ public class MainManager : MonoBehaviour
                                         }
                                     }
 
+                                    buttons[buttonIndex].onClick.AddListener(() => Money -= price);
                                     buttons[buttonIndex].onClick.AddListener(() => DisplayPart(part));
                                 }
                                 else
@@ -452,7 +452,8 @@ public class MainManager : MonoBehaviour
         {
             var dialogArray = JsonLoader.GetJsonArrayFromFile("LowBudgetScript.json");
             StartDialog(dialogArray);
-            SceneManager.LoadScene("MainMenu");
+            //SceneManager.LoadScene("MainMenu");
+            ResetSaves();
             OnMoneyChange = null;
             OnReputationChange = null;
         }
@@ -460,7 +461,8 @@ public class MainManager : MonoBehaviour
         {
             var dialogArray = JsonLoader.GetJsonArrayFromFile("LowRepScript.json");
             StartDialog(dialogArray);
-            SceneManager.LoadScene("MainMenu");
+            //SceneManager.LoadScene("MainMenu");
+            ResetSaves();
             OnMoneyChange = null;
             OnReputationChange = null;
         }
