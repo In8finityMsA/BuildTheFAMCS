@@ -59,7 +59,9 @@ public class RoomScript : MonoBehaviour
     {
         for (int i = 0; i < roomInfo.characters.Count; i++)
         {
-            var characterObject = Instantiate(characterPrefab, gameObject.transform.position, Quaternion.identity);
+            var characterObject = Instantiate(characterPrefab, new Vector2 (gameObject.transform.position.x,
+                                                                            (float)(gameObject.transform.position.y - 0.8)),
+                                                                            Quaternion.identity);
             characterObject.GetComponent<SpriteRenderer>().sortingLayerName = "Characters";
             characterObject.transform.SetParent(gameObject.transform);
             //characterObject.transform.localPosition =
