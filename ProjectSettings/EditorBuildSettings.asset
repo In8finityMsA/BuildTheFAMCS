@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Minigames/FinalsScene.unity
     guid: 2b19e63ef163e284da136e2e62c2ea42
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: c766e704bf017cf49b582f993f8c66b3
   m_configObjects: {}
