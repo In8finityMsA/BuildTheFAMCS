@@ -11,6 +11,7 @@ public class CameraMove : MonoBehaviour
     
     public GameObject backgroundSprite;
     public Camera cameraObj;
+    public static bool isCameraBlocked = false;
     
     private Rect cameraBoundDefault;
     private Rect cameraBound;
@@ -74,6 +75,10 @@ public class CameraMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isCameraBlocked)
+        {
+            return;
+        }
 
     #if UNITY_ANDROID || UNITY_IOS
 

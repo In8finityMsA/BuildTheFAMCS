@@ -17,4 +17,5 @@ public class RoomScriptableObject : ScriptableObject
     //public float width; 
     internal uint floor;
     internal uint indexInFloor;
+    public RoomScript script;
 }
