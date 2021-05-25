@@ -92,7 +92,7 @@ public class MainManager : MonoBehaviour
     
     public void SetRoomUnlocked(RoomScriptableObject room, bool unlockState)
     {
-        bool allUnlocked = true;
+        
 
         if (rooms.ContainsKey(room))
         {
@@ -105,18 +105,19 @@ public class MainManager : MonoBehaviour
             Debug.Log("No such room found");
         }
 
-        foreach (RoomScriptableObject tempRoom in roomsList)
+        bool allUnlocked = true;
+        for (int i = 0; i < roomsUnlocked.Length; i++)
         {
-            if (!tempRoom.isUnlocked)
+            if (roomsUnlocked[i] == false)
             {
                 allUnlocked = false;
-                break;
             }
         }
 
         if (allUnlocked)
         {
-            Debug.Log("All rooms unlocked");
+            var dialogArray = JsonLoader.GetJsonArrayFromFile("ExamsStartScript.json");
+            StartDialog(dialogArray);
         }
     }
 
@@ -374,6 +375,8 @@ public class MainManager : MonoBehaviour
                     }
                     case "reputation":
                     {
+                        var value = Int32.Parse(actionWords[1]);
+                        Reputation -= value;
                         break;
                     }
                     case "close":

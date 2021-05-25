@@ -218,15 +218,17 @@ public class ManagerWordsScript : MonoBehaviour
                 if (HasWon())
                 {
                     MainManager.Instance.Money += reward;
+                    MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
                     EndButton.GetComponentInChildren<Button>().GetComponentInChildren<Text>().text = $"Вы выиграли! Ваша награда: {reward}";
                     
                 }
                 else
                 {
-                    MainManager.Instance.Money -= penalty;
+                    MainManager.Instance.Reputation -= penalty;
+                    MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
                     EndButton.GetComponentInChildren<Button>().GetComponentInChildren<Text>().text = $"Вы проиграли! Вы потеряли {penalty}";
                 }
-                MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
+                
                 EndButton.SetActive(true);
                 Clear();
             }
