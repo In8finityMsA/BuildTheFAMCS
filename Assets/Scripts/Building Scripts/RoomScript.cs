@@ -120,15 +120,6 @@ public class RoomScript : MonoBehaviour
                 {
                     var buyArray = JsonLoader.GetJsonArrayFromFile(roomInfo.jsonFilename);
                     MainManager.Instance.StartDialog(buyArray);
-                    /*if (MainManager.Instance.Money >= roomInfo.costToBuild)
-                    {
-                        RoomUnlock();
-                        Debug.Log("Room is unlocked");
-                    }
-                    else
-                    {
-                        Debug.Log("Room can't be unlocked. Not enough money.");
-                    }*/
                 }
 
             }

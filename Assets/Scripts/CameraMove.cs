@@ -56,11 +56,11 @@ public class CameraMove : MonoBehaviour
         cameraBoundDefault.xMax = backgroundBounds.max.x - zoomOutDefault * cameraAspectRatio;
         cameraBoundDefault.yMin = backgroundBounds.min.y + zoomOutDefault;
         cameraBoundDefault.yMax = backgroundBounds.max.y - zoomOutDefault;
-        Debug.Log(cameraBoundDefault.xMin + " " + cameraBoundDefault.xMax + " " + cameraBoundDefault.yMin + " " + cameraBoundDefault.yMax);
+        /*Debug.Log(cameraBoundDefault.xMin + " " + cameraBoundDefault.xMax + " " + cameraBoundDefault.yMin + " " + cameraBoundDefault.yMax);
         Debug.Log(backgroundBounds.min.x + " " +
                   backgroundBounds.max.x + " " +
                   backgroundBounds.min.y + " " +
-                  backgroundBounds.max.y);
+                  backgroundBounds.max.y);*/
 
         cameraBound = cameraBoundDefault;
         zoomOutMax = Mathf.Min((backgroundBounds.max.x - backgroundBounds.min.x) / cameraAspectRatio / 2,
