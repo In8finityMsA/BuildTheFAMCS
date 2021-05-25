@@ -5,6 +5,8 @@ using System.Data.SqlTypes;
 using System.IO;
 using SaveLogic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainManager : MonoBehaviour
 {
@@ -23,6 +25,34 @@ public class MainManager : MonoBehaviour
     private int money;
     private bool[] roomsUnlocked;
     private bool[] scenesCompleted;
+    
+    //Dialogs
+    private int currentIndex;
+
+    public GameObject dialogWindow;
+    public GameObject darkTint;
+    
+    public GameObject textObject;
+    
+    public GameObject rightButtonObject;
+    public GameObject leftButtonObject;
+    public GameObject bigButtonObject;
+    
+    public GameObject rightButtonTextObject;
+    public GameObject leftButtonTextObject;
+    public GameObject bigButtonTextObject;
+    
+    
+    private Text text;
+    private Button rightButton;
+    private Button leftButton;
+    private Button bigButton;
+    private Text rightButtonText;
+    private Text leftButtonText;
+    private Text bigButtonText;
+
+    private List<DialogPart> dialog;
+    private List<Button> buttons;
 
     public int Money
     {
@@ -150,6 +180,142 @@ public class MainManager : MonoBehaviour
         {
             scenes.Add(scene, index++);
         }
+        
+        //Debug
+        var darkTintButton = darkTint.GetComponent<Button>();
+        darkTintButton.onClick.AddListener(() => EndDialog());
+
+        text = textObject.GetComponent<Text>();
+        
+        rightButton = rightButtonObject.GetComponent<Button>();
+        leftButton = leftButtonObject.GetComponent<Button>();
+        bigButton = bigButtonObject.GetComponent<Button>();
+        
+        rightButtonText = rightButtonTextObject.GetComponent<Text>();
+        leftButtonText = leftButtonTextObject.GetComponent<Text>();
+        bigButtonText = bigButtonTextObject.GetComponent<Text>();
+        
+        
+        buttons.Add(leftButton);
+        buttons.Add(rightButton);
+        buttons.Add(bigButton);
+
+    }
+
+    public void StartDialog(List<DialogPart> dialog)
+    {
+        dialogWindow.SetActive(true);
+        darkTint.SetActive(true);
+        currentIndex = 0;
+        CameraMove.isCameraBlocked = true;
+        DisplayPart(GetCurrentPart());
+
+    }
+
+    private void DisplayPart(DialogPart dialogPart)
+    {
+        ResetVisibiltyAndListeneres();
+        
+        //rightButton.onClick.AddListener(() => Debug.Log("Clicked!!!"));
+        text.text = dialogPart.text;
+        if (dialogPart.replies.Count == 0)
+        {
+            rightButtonObject.SetActive(true);
+
+            rightButtonText.text = "Далее";
+            CheckActions(dialogPart);
+            
+            rightButton.onClick.AddListener(() => SetCurrent(dialogPart.nextIndices[0]));
+        }
+        else
+        {
+            if (dialogPart.replies.Count == 1)
+            {
+                bigButtonObject.SetActive(true);
+                
+                CheckActions(dialogPart);
+                
+                bigButtonText.text = dialogPart.replies[0];
+                bigButton.onClick.AddListener(() => SetCurrent(dialogPart.nextIndices[0]));
+            }
+            else if (dialogPart.replies.Count == 2)
+            {
+                rightButtonObject.SetActive(true);
+                leftButtonObject.SetActive(true);
+
+                CheckActions(dialogPart);
+                
+                leftButtonText.text = dialogPart.replies[0];
+                leftButton.onClick.AddListener(() => SetCurrent(dialogPart.nextIndices[0]));
+                
+                rightButtonText.text = dialogPart.replies[1];
+                rightButton.onClick.AddListener(() => SetCurrent(dialogPart.nextIndices[1]));
+            }
+        }
+    }
+
+    private void CheckActions(DialogPart dialogPart)
+    {
+        int buttonIndex = 0;
+        foreach (var actionString in dialogPart.actions)
+        {
+            string[] actionWords = actionString.Split();
+            switch (actionWords[0])
+            {
+                case "scene":
+                {
+                    if (actionWords.Length >= 2)
+                    {
+                        buttons[buttonIndex].onClick.AddListener(() => SetScene(actionWords[1]));
+                    }
+                    break;
+                }
+                case "buy":
+                {
+                    break;
+                }
+                case "reputation":
+                {
+                    break;
+                }
+            }
+
+            buttonIndex++;
+        }
+    }
+
+    private void SetCurrent(int index)
+    {
+        currentIndex = index;
+        DisplayPart(GetCurrentPart());
+    }
+
+    private void SetScene(string scene)
+    {
+        SceneManager.LoadScene(scene);
+        EndDialog();
+    }
+    
+    private DialogPart GetCurrentPart()
+    {
+        return dialog[currentIndex];
+    }
+
+    public void EndDialog()
+    {
+        ResetVisibiltyAndListeneres();
+        CameraMove.isCameraBlocked = false;
+        dialogWindow.SetActive(false);
+    }
+    
+    private void ResetVisibiltyAndListeneres()
+    {
+        rightButtonObject.SetActive(false);
+        leftButtonObject.SetActive(false);
+        bigButtonObject.SetActive(false);
+        rightButton.onClick.RemoveAllListeners();
+        leftButton.onClick.RemoveAllListeners();
+        bigButton.onClick.RemoveAllListeners();
     }
 
     private void OnApplicationQuit()
@@ -165,6 +331,29 @@ public class MainManager : MonoBehaviour
         SaveScript.SaveMoney(money);
         SaveScript.SaveRooms(roomsUnlocked);
         SaveScript.SaveScenes(scenesCompleted);
+    }
+    
+    [System.Serializable]
+    public class DialogPart
+    {
+        public string text;
+        public List<string> replies;
+        public List<int> nextIndices;
+        public List<string> actions;
+        //public bool hasScene;
+
+        public DialogPart()
+        {
+        }
+
+        public DialogPart(string text, List<string> replies, List<int> nextIndices, List<string> actions)
+        {
+            this.text = text;
+            this.replies = replies;
+            this.nextIndices = nextIndices;
+            this.actions = actions;
+            //this.hasScene = hasScene;
+        }
     }
 
     // Update is called once per frame
