@@ -16,17 +16,25 @@ public class BugScript : MonoBehaviour
     }
     void Update()
     {
-        timeLeft -= Time.deltaTime;
-        if (timeLeft <= 0)
+        if (GameObject.Find("ManagerBugEmpty").GetComponent<ManagerBugsScript>().IsPlaying)
         {
-            movement = new Vector2(Random.Range(-7f, 7f), Random.Range(-7f, 7f));
-            timeLeft += accelerationTime;
+            timeLeft -= Time.deltaTime;
+            if (timeLeft <= 0)
+            {
+                movement = new Vector2(Random.Range(-7f, 7f), Random.Range(-7f, 7f));
+                timeLeft += accelerationTime;
+            }
         }
+        
     }
     private void OnMouseDown()
     {
-        ManagerBugsScript.Instance.bugs.Remove(this.gameObject);
-        gameObject.SetActive(false);
+        if (GameObject.Find("ManagerBugEmpty").GetComponent<ManagerBugsScript>().IsPlaying)
+        {
+            ManagerBugsScript.Instance.bugs.Remove(this.gameObject);
+            gameObject.SetActive(false);
+        }
+        
     }
     private void OnMouseUp()
     {

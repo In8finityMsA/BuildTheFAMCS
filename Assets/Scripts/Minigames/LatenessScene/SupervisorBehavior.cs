@@ -23,12 +23,14 @@ public class SupervisorBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Really SHIT CODE for rotation, sorry pls
+        if (GameObject.Find("GameManager").GetComponent<Manager>().IsPlaying)
+        {
+            float angle = Mathf.Atan2(Supervisor.position.y - Student.position.y, Supervisor.position.x - Student.position.x) * Mathf.Rad2Deg;
+            var TargetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle - 90));
+            Supervisor.rotation = Quaternion.Lerp(Supervisor.rotation, TargetRotation, Time.deltaTime * RotationSpeed);
 
-        float angle = Mathf.Atan2(Supervisor.position.y - Student.position.y, Supervisor.position.x - Student.position.x) * Mathf.Rad2Deg;
-        var TargetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle - 90));
-        Supervisor.rotation = Quaternion.Lerp(Supervisor.rotation, TargetRotation, Time.deltaTime * RotationSpeed);
-
-        Supervisor.position = Vector3.MoveTowards(Supervisor.position, Student.position, Time.deltaTime * WalkSpeed);
+            Supervisor.position = Vector3.MoveTowards(Supervisor.position, Student.position, Time.deltaTime * WalkSpeed);
+        }
+        
     }
 }
