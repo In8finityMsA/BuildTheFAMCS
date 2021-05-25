@@ -36,11 +36,11 @@ public class MainMenuScript : MonoBehaviour
 
     void OnNewClick()
     {
-        
+        MainManager.newGame = true;
     }
 
     void OnContinueClick()
     {
-
+        MainManager.newGame = false;
     }
 }
