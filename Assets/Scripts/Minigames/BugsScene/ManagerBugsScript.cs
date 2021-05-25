@@ -25,6 +25,18 @@ public class ManagerBugsScript : MonoBehaviour
     public int bugAmount;
     private bool isClicked = false;
 
+    public bool IsPlaying = false;
+    public GameObject BackPanel;
+    public GameObject HintBox;
+    public GameObject EndButton;
+
+    public void StartGame()
+    {
+        IsPlaying = true;
+        HintBox.SetActive(false);
+        BackPanel.GetComponent<UnityEngine.UI.Image>().color = Color.clear;
+    }
+
     public float Parabola(float x)
     {
         return x * x;
@@ -66,7 +78,7 @@ public class ManagerBugsScript : MonoBehaviour
         canv = gameObject.GetComponentInChildren<Canvas>();
 
     }
-    void OnClick()
+    public void OnClick()
     {
         if (!isClicked)
         {
@@ -77,34 +89,36 @@ public class ManagerBugsScript : MonoBehaviour
     }
     void Start()
     {
-        
-        gameObject.GetComponentInChildren<Canvas>().gameObject.SetActive(false);
         Debug.Log("set act false");
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer -= Time.deltaTime;
-        if (timer <= 0 && bugs.Count != 0)
+        if (IsPlaying)
         {
-            for (int i = 0; i < bugs.Count; i++)
+            timer -= Time.deltaTime;
+            if (timer <= 0 && bugs.Count != 0)
             {
-                bugs[i].SetActive(false);
+                for (int i = 0; i < bugs.Count; i++)
+                {
+                    bugs[i].SetActive(false);
+                }
+                MainManager.Instance.Money -= penalty;
+                MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
+    
+                EndButton.GetComponentInChildren<Button>().GetComponentInChildren<Text>().text = "You have lost!";
+                EndButton.SetActive(true);
             }
-            MainManager.Instance.Money -= penalty;
-            MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
-            canv.gameObject.GetComponentInChildren<Button>().onClick.AddListener(OnClick);
-            canv.gameObject.GetComponentInChildren<Button>().GetComponentInChildren<Text>().text = "You have lost!";
-            canv.gameObject.SetActive(true);
+            if (bugs.Count == 0)
+            {
+                MainManager.Instance.Money += reward;
+                MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
+                
+                EndButton.GetComponentInChildren<Button>().GetComponentInChildren<Text>().text = "You have won!";
+                EndButton.SetActive(true);
+            }
         }
-        if (bugs.Count == 0)
-        {
-            MainManager.Instance.Money += reward;
-            MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
-            canv.gameObject.GetComponentInChildren<Button>().onClick.AddListener(OnClick);
-            canv.gameObject.GetComponentInChildren<Button>().GetComponentInChildren<Text>().text = "You have won!";
-            canv.gameObject.SetActive(true);
-        }
+        
     }
 }

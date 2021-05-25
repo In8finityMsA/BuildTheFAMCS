@@ -21,17 +21,20 @@ public class TileScript : MonoBehaviour
  
     void Update()
     {
-        if (collist.Count != 0)
+        if (GameObject.Find("ManagerEmpty").GetComponent<ManagerWordsScript>().IsPlaying)
         {
-            foreach (var item in collist)
+            if (collist.Count != 0)
             {
-                if (item.gameObject.GetComponent<WordScript>().mouseDown)
+                foreach (var item in collist)
                 {
-                    return;
+                    if (item.gameObject.GetComponent<WordScript>().mouseDown)
+                    {
+                        return;
+                    }
                 }
+                collist[collist.Count - 1].gameObject.transform.rotation = Quaternion.identity;
+                collist[collist.Count - 1].gameObject.transform.position = transform.position;
             }
-            collist[collist.Count - 1].gameObject.transform.rotation = Quaternion.identity;
-            collist[collist.Count - 1].gameObject.transform.position = transform.position;
         }
         //if (onTriggerNow && !collision.gameObject.GetComponent<WordScript>().mouseDown)
         //{

@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class RoomScript : MonoBehaviour
 {
@@ -8,8 +9,15 @@ public class RoomScript : MonoBehaviour
     public GameObject characterPrefab;
     private DateTime time;
 
+    // Shit code for fix missclicks
+    private GameObject Camera;
+    private Vector3 startDrag;
+    private Vector3 endDrag;
+
     internal void Init(RoomScriptableObject room)
     {
+        Camera = GameObject.Find("Main Camera");
+
         if (isInit) return;
         
         isInit = true;
@@ -41,6 +49,7 @@ public class RoomScript : MonoBehaviour
     private void RoomUnlock()
     {
         MainManager.Instance.Money -= roomInfo.costToBuild;
+        roomInfo.isUnlocked = true;
         MainManager.Instance.SetRoomUnlocked(roomInfo, true);
         SetSprite();
         DrawCharacters();
@@ -63,24 +72,50 @@ public class RoomScript : MonoBehaviour
 
     void OnMouseDown()
     {
-        time = System.DateTime.Now;
+        startDrag = Camera.transform.position;
     }
     
     void OnMouseUp()
     {
-        if (System.DateTime.Now - time < new TimeSpan(0, 0, 1))
+        endDrag = Camera.transform.position;
+        if (startDrag == endDrag)
         {
-            Debug.Log($"Room Clicked! floor: {roomInfo.floor}, index: {roomInfo.indexInFloor}.");
-            if (MainManager.Instance.Money >= roomInfo.costToBuild && roomInfo.isUnlocked == false)
+        if (EventSystem.current.IsPointerOverGameObject())
             {
-                RoomUnlock();
-                Debug.Log("Room is unlocked");
-            }
-            else if (roomInfo.isUnlocked == false)
-            {
-                Debug.Log("Room can't be unlocked. Not enough money.");
+                Debug.Log("Clicked on UI");
+                return;
             }
             
+            time = System.DateTime.Now;
+
+
+            if (System.DateTime.Now - time < new TimeSpan(0, 0, 1))
+            {
+                if (EventSystem.current.IsPointerOverGameObject())
+                {
+                    Debug.Log("Clicked on UI");
+                    return;
+                }
+
+                Debug.Log($"Room Clicked! floor: {roomInfo.floor}, index: {roomInfo.indexInFloor}.");
+                if (roomInfo.isUnlocked == true)
+                {
+                    roomInfo.characters[0].script.StartDialog();
+                }
+                if (roomInfo.isUnlocked == false)
+                {
+                    if (MainManager.Instance.Money >= roomInfo.costToBuild)
+                    {
+                        RoomUnlock();
+                        Debug.Log("Room is unlocked");
+                    }
+                    else
+                    {
+                        Debug.Log("Room can't be unlocked. Not enough money.");
+                    }
+                }
+
+            }
         }
     }
     
