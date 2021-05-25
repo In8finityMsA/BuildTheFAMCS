@@ -75,6 +75,11 @@ public class RoomScript : MonoBehaviour
     void OnMouseDown()
     {
         startDrag = Camera.transform.position;
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            Debug.Log("Clicked on UI");
+            return;
+        }
     }
     
     void OnMouseUp()
