@@ -489,6 +489,7 @@ MonoBehaviour:
   tap: {fileID: 0}
   background: {fileID: 190142778}
   timeForGame: 0
+  hintsPanel: {fileID: 273935046}
   scoresNeededToWin: 0
   isWinning: 0
   timerAnimation: 0
@@ -525,7 +526,8 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 877859630}
   m_Father: {fileID: 1334014090}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -634,7 +636,7 @@ MonoBehaviour:
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -756,17 +758,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 877859629}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1334014090}
-  m_RootOrder: 1
+  m_Father: {fileID: 273935047}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -0.034485, y: 75}
-  m_SizeDelta: {x: 750, y: 150}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 6.5562, y: -0.0000076294}
+  m_SizeDelta: {x: 1754.9543, y: 579.704}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!111 &877859631
 Animation:
@@ -806,11 +808,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 26
+    m_FontSize: 80
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
-    m_MaxSize: 40
+    m_MaxSize: 80
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -987,7 +989,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 273935047}
-  - {fileID: 877859630}
   - {fileID: 1600345973}
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -1009,7 +1010,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6e1ba3debd17c74590937e806f7c176, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btn: {fileID: 0}
 --- !u!1 &1346987386
 GameObject:
   m_ObjectHideFlags: 0
@@ -1125,12 +1125,12 @@ RectTransform:
   m_Children:
   - {fileID: 870050303}
   m_Father: {fileID: 1334014090}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0345, y: -5.4271}
-  m_SizeDelta: {x: 600.9542, y: 281.6347}
+  m_AnchoredPosition: {x: -8.2299, y: 17.5199}
+  m_SizeDelta: {x: 617.3448, y: 327.5286}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1600345974
 MonoBehaviour:

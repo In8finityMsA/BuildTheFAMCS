@@ -20,6 +20,8 @@ public class ManagerTapScript : MonoBehaviour
     //limits time
     public float timeForGame;
 
+    public GameObject hintsPanel;
+
     public float scoresNeededToWin;
 
     public bool isWinning;
@@ -67,10 +69,24 @@ public class ManagerTapScript : MonoBehaviour
         scale.y *= cameraSize.y / spriteSize.y;
         background.transform.position = Vector2.zero; // Optional
         background.transform.localScale = scale;
+
+        //SpriteRenderer spriteRenderer2 = hintsPanel.GetComponent<SpriteRenderer>();
+        //Vector2 spriteSize2 = spriteRenderer2.sprite.bounds.size;
+        //Vector2 scalePan = transform.localScale;
+        //scalePan.x *= cameraSize.x / spriteSize2.x;
+        //scalePan.y *= cameraSize.y / spriteSize2.y;
+        //hintsPanel.transform.position = Vector2.zero; // Optional
+        //hintsPanel.transform.localScale = scalePan;
+
     }
 
     void Start()
     {
+        //hintsPanel.transform.localScale = new Vector3(40, 4, 0);
+        //hintsPanel.transform.position = background.transform.position;
+       // hintsPanel.transform.localScale = background.transform.localScale;
+
+        hintsPanel.GetComponentInChildren<Text>().gameObject.transform.parent = hintsPanel.transform;
         OnTapSpeedChangeHandler += UIOnProgressChange;
         OnWinningHandler += UIEndWinAnimation;
 
