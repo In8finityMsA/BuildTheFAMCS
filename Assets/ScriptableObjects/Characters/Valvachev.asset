@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Valvachev
   jsonFilename: Valvachev
-  sprite: {fileID: 21300000, guid: c97786e9459b34e058449b84cd9aab61, type: 3}
+  sprite: {fileID: 21300000, guid: 84ceb334992bb994abb0380f30c0b169, type: 3}
   minigameSceneNames:
   - ServerScene
+  hasQuest: 0
+  script: {fileID: 0}
