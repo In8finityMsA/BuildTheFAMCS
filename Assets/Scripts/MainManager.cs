@@ -144,6 +144,7 @@ public class MainManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        
         roomsUnlocked = new bool[roomsList.Count];
         money = defaultMoney;
         scenesCompleted = new bool[scenesList.Count];
@@ -199,6 +200,9 @@ public class MainManager : MonoBehaviour
         buttons.Add(leftButton);
         buttons.Add(rightButton);
         buttons.Add(bigButton);
+        
+        dialogWindow.SetActive(false);
+        darkTint.SetActive(false);
 
     }
 
@@ -286,6 +290,11 @@ public class MainManager : MonoBehaviour
                     {
                         break;
                     }
+                    case "close":
+                    {
+                        buttons[buttonIndex].onClick.AddListener(() => EndDialog());
+                        break;
+                    }
                 }
             }
             else
@@ -311,7 +320,15 @@ public class MainManager : MonoBehaviour
     
     private DialogPart GetCurrentPart()
     {
-        return dialog[currentIndex];
+        if (currentIndex >= dialog.Count)
+        {
+            Debug.Log($"Index for dialog is to big. Index: {currentIndex}, Length: {dialog.Count}");
+            return null;
+        }
+        else
+        {
+            return dialog[currentIndex];
+        }
     }
 
     public void EndDialog()
@@ -347,6 +364,12 @@ public class MainManager : MonoBehaviour
         SaveScript.SaveMoney(money);
         SaveScript.SaveRooms(roomsUnlocked);
         SaveScript.SaveScenes(scenesCompleted);
+    }
+
+    [System.Serializable]
+    public class DialogTest
+    {
+        public List<string> text;
     }
     
     [System.Serializable]
