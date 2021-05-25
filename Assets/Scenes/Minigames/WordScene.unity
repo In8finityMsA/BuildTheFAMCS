@@ -568,8 +568,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8af488c12eae8ba4a9e3a4b9e79c5722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  penalty: 0
-  reward: 0
+  penalty: 5
+  reward: 1000
   wordPrefab: {fileID: 7786914918137567200, guid: a0fdb0329ae9e024596e15b57ae02d22,
     type: 3}
   tilePrefab: {fileID: 7655605565276789565, guid: 54ed488d915ecc14282cdbc28a916125,

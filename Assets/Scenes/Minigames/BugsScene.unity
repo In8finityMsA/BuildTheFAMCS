@@ -1556,8 +1556,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ac999f1a4ad5964da119fa41e1916f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  penalty: 0
-  reward: 0
+  penalty: 5
+  reward: 1000
   image: {fileID: 1026446161}
   timeToWaitOk: 0
   background: {fileID: 511004189}

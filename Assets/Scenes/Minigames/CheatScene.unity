@@ -310,8 +310,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed94f717c6cd54d4692d2295479cc96c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  penalty: 0
-  reward: 0
+  penalty: 5
+  reward: 1000
   IsPlaying: 0
   BackPanel: {fileID: 895190103}
   HintBox: {fileID: 1897642607}
