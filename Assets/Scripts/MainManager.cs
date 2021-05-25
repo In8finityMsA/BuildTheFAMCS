@@ -17,6 +17,8 @@ public class MainManager : MonoBehaviour
     private Dictionary<RoomScriptableObject, int> rooms = new Dictionary<RoomScriptableObject, int>();
     public List<string> scenesList = new List<string>() {"BugsScene", "CheatScene", "LatenessScene", "ServerScene", "WordScene"};
     private Dictionary<string, int> scenes = new Dictionary<string, int>();
+
+    public static bool newGame;
     
     public bool useSaves;
     public bool resetSavesOnStartup;

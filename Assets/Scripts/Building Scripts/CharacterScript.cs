@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Xml.Serialization;
+using TinyJson;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -25,13 +28,22 @@ public class CharacterScript : MonoBehaviour
         
         SetSprite();
 
-        /*var jsonRelativeFilename = Application.dataPath + "/" + characterInfo.jsonFilename;
+        var jsonRelativeFilename = Application.dataPath + "/Dialogs/" + characterInfo.jsonFilename;
         if (File.Exists(jsonRelativeFilename))
         {
+            Debug.Log("File found: " + jsonRelativeFilename + "!!!");
             using (var reader = new StreamReader(jsonRelativeFilename))
             {
                 string jsonString = reader.ReadToEnd();
-                dialog = JsonUtility.FromJson<List<DialogPart>>(jsonString);
+                var dialogArray = JsonUtility.FromJson<DialogArray>(jsonString);
+                if (dialogArray != null)
+                {
+                    dialog = dialogArray.array.ToList();
+                }
+                else
+                {
+                    Debug.Log("Json is NOT PARSED!!!");
+                }
             }
             
         }
@@ -39,13 +51,17 @@ public class CharacterScript : MonoBehaviour
         {
             Debug.Log("No dialog file found: " + jsonRelativeFilename);
             //throw new FileNotFoundException();
-        }*/
+        }
         
         //Only for testing
-        dialog.Add(new MainManager.DialogPart("testText0", new List<string>(){"Next", "After Next"}, new List<int>(){1, 2}, new List<string>(){"", "", ""}));
-        dialog.Add(new MainManager.DialogPart("testText1", new List<string>(){}, new List<int>(){2}, new List<string>(){"", "", ""}));
+        if (dialog == null)
+        {
+            dialog.Add(new MainManager.DialogPart("testText0", new List<string>() {"Next", "After Next"},
+                new List<int>() {1, 2}, new List<string>() {"", "", ""}));
+        }
+        /*dialog.Add(new MainManager.DialogPart("testText1", new List<string>(){}, new List<int>(){2}, new List<string>(){"", "", ""}));
         dialog.Add(new MainManager.DialogPart("testText2", new List<string>(){"Mid"}, new List<int>(){3}, new List<string>(){"", "", ""}));
-        dialog.Add(new MainManager.DialogPart("testText3", new List<string>(){"ToBegin", "ToLast(Scene)"}, new List<int>(){0, 3}, new List<string>(){"", "scene BugsScene", ""}));
+        dialog.Add(new MainManager.DialogPart("testText3", new List<string>(){"ToBegin", "ToLast(Scene)"}, new List<int>(){0, 3}, new List<string>(){"", "scene BugsScene", ""}));*/
     }
 
     private void IsNull(string name, GameObject checkObject)
@@ -69,24 +85,9 @@ public class CharacterScript : MonoBehaviour
 
     }
 
-   // [System.Serializable]
-    /*public class DialogPart
+    [System.Serializable]
+    public class DialogArray
     {
-        public string text;
-        public List<string> replies;
-        public List<int> nextIndices;
-        public bool hasScene;
-
-        public DialogPart()
-        {
-        }
-
-        public DialogPart(string text, List<string> replies, List<int> nextIndices, bool hasScene)
-        {
-            this.text = text;
-            this.replies = replies;
-            this.nextIndices = nextIndices;
-            this.hasScene = hasScene;
-        }
-    }*/
+        public MainManager.DialogPart[] array;
+    }
 }
