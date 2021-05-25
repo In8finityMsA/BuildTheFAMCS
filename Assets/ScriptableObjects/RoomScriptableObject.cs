@@ -18,4 +18,5 @@ public class RoomScriptableObject : ScriptableObject
     internal uint floor;
     internal uint indexInFloor;
     public RoomScript script;
+    public string jsonFilename;
 }

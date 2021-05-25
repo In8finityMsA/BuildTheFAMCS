@@ -1,4 +1,5 @@
 ﻿using System;
+using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -23,7 +24,8 @@ public class RoomScript : MonoBehaviour
         isInit = true;
         roomInfo = room;
         if (roomInfo == null)  {Debug.Log("Null room"); return;}
-        
+
+        roomInfo.script = this;
         SetSprite();
 
         foreach (var character in roomInfo.characters)
@@ -46,9 +48,9 @@ public class RoomScript : MonoBehaviour
         boxCollider.size = boxCollider.transform.InverseTransformVector(spriteRenderer.bounds.size);
     }
 
-    private void RoomUnlock()
+    public void RoomUnlock()
     {
-        MainManager.Instance.Money -= roomInfo.costToBuild;
+        //MainManager.Instance.Money -= roomInfo.costToBuild;
         roomInfo.isUnlocked = true;
         MainManager.Instance.SetRoomUnlocked(roomInfo, true);
         SetSprite();
@@ -116,7 +118,9 @@ public class RoomScript : MonoBehaviour
                 }
                 if (roomInfo.isUnlocked == false)
                 {
-                    if (MainManager.Instance.Money >= roomInfo.costToBuild)
+                    var buyArray = JsonLoader.GetJsonArrayFromFile(roomInfo.jsonFilename);
+                    MainManager.Instance.StartDialog(buyArray);
+                    /*if (MainManager.Instance.Money >= roomInfo.costToBuild)
                     {
                         RoomUnlock();
                         Debug.Log("Room is unlocked");
@@ -124,7 +128,7 @@ public class RoomScript : MonoBehaviour
                     else
                     {
                         Debug.Log("Room can't be unlocked. Not enough money.");
-                    }
+                    }*/
                 }
 
             }
