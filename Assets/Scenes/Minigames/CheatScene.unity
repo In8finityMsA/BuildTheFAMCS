@@ -315,7 +315,7 @@ MonoBehaviour:
   IsPlaying: 0
   BackPanel: {fileID: 895190103}
   HintBox: {fileID: 1897642607}
-  resulttext: {fileID: 0}
+  resulttext: {fileID: 1105599639}
   EndButton: {fileID: 1564986610}
   prefab: {fileID: 3710080649647986069, guid: 96e726a2fd2efba45920e9ad2eaf547d, type: 3}
   background: {fileID: 2129438486}
@@ -415,7 +415,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: 
 --- !u!222 &1105599642
 CanvasRenderer:
   m_ObjectHideFlags: 0

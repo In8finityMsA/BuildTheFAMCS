@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenuScript : MonoBehaviour
@@ -37,10 +38,12 @@ public class MainMenuScript : MonoBehaviour
     void OnNewClick()
     {
         MainManager.newGame = true;
+        SceneManager.LoadScene("MainScene");
     }
 
     void OnContinueClick()
     {
         MainManager.newGame = false;
+        SceneManager.LoadScene("MainScene");
     }
 }
