@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,6 +9,9 @@ public class ManagerBugsScript : MonoBehaviour
 {
     public int penalty;
     public int reward;
+    public GameObject image;
+
+    public float timeToWaitOk;
     
     Rect cameraRect;
     public GameObject background;
@@ -35,6 +39,7 @@ public class ManagerBugsScript : MonoBehaviour
     {
         IsPlaying = true;
         HintBox.SetActive(false);
+        
         BackPanel.GetComponent<UnityEngine.UI.Image>().color = Color.clear;
     }
 
@@ -48,6 +53,9 @@ public class ManagerBugsScript : MonoBehaviour
     }
     private void Awake()
     {
+        timeToWaitOk = 1;
+        image.SetActive(false);
+        resulttext.SetActive(false);
         timer = 10;
         var bottomLeft = Camera.main.ScreenToWorldPoint(Vector3.zero);
         var topRight = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, Camera.main.pixelHeight));
@@ -101,28 +109,38 @@ public class ManagerBugsScript : MonoBehaviour
             timer -= Time.deltaTime;
             if (timer <= 0 && bugs.Count != 0)
             {
+
                 for (int i = 0; i < bugs.Count; i++)
                 {
                     bugs[i].SetActive(false);
                 }
-                MainManager.Instance.Money -= penalty;
-                MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
+                resulttext.SetActive(true);
+                image.SetActive(true);
+                resulttext.GetComponent<Text>().text = "Баги вас одолели(..." + '\n' + $"Ваши потери составили: {penalty}";
+                timeToWaitOk -= Time.deltaTime;
+                if (timeToWaitOk <= 0)
+                {
+                    //MainManager.Instance.Money -= penalty;
+                    //MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
 
-                resulttext.GetComponent<Text>().text = "Баги вас одолели(..." + '\n' + $"Ваши потерисоставили: {penalty}";
+                    
 
-
-                EndButton.GetComponentInChildren<Button>().GetComponentInChildren<Text>().text = "OK";
-                EndButton.SetActive(true);
+                    Thread.Sleep(2000);
+                    EndButton.GetComponentInChildren<Button>().GetComponentInChildren<Text>().text = "OK(";
+                    EndButton.SetActive(true);
+                }               
             }
             if (bugs.Count == 0)
             {
                 MainManager.Instance.Money += reward;
                 MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
-                
-                EndButton.GetComponentInChildren<Button>().GetComponentInChildren<Text>().text = "Все починилось, все работает!";
+
+                resulttext.SetActive(true);
+                image.SetActive(true);
+                resulttext.GetComponent<Text>().text = "Все починилось, все работает!" + '\n' + $"Вы заработали {reward}";
+                EndButton.GetComponentInChildren<Button>().GetComponentInChildren<Text>().text = "OK!";
                 EndButton.SetActive(true);
             }
-        }
-        
+        }      
     }
 }

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -43,6 +43,7 @@ public class ManagerTapScript : MonoBehaviour
     public GameObject HintBox;
     public GameObject BackPanel;
     public GameObject EndButton;
+    public GameObject ResultText;
 
     public float endAnimationTime;
 
@@ -113,18 +114,24 @@ public class ManagerTapScript : MonoBehaviour
 
     void UITheEndWon()
     {
-        MainManager.Instance.Money += reward;
-        MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
-        EndButton.SetActive(true);
+        //MainManager.Instance.Money += reward;
+        //MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
 
+        ResultText.SetActive(true);
+        ResultText.GetComponent<Text>().text = $"Поздравляем, вы смогли восстановить сервер! {reward}";
+
+        EndButton.SetActive(true);
         EndButton.GetComponentInChildren<Text>().text = "You won!";
     }
 
     void UITheEndLose()
     {
-        MainManager.Instance.Money -= penalty;
-        MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
-        
+        //MainManager.Instance.Money -= penalty;
+        //MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
+
+        ResultText.SetActive(true);
+        ResultText.GetComponent<Text>().text = $"Серж, сервер упал, вы потеряли деньги {penalty}";
+
         EndButton.SetActive(true);
         EndButton.GetComponentInChildren<Text>().text = "You lost!";
         //EndButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(OnClick);

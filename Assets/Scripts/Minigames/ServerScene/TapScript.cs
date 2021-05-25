@@ -38,7 +38,7 @@ public class TapScript : MonoBehaviour
         isEnding = false;
 
         //params
-        curLoad = 15;
+        curLoad = 80;
         
         AnimationStartHandler += UIStartAnimation;
         AnimationStartHandler();

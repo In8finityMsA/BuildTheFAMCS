@@ -8,6 +8,7 @@ namespace SaveLogic
     {
         private static string pathRooms = Application.persistentDataPath + "/rooms.sav";
         private static string pathMoney = Application.persistentDataPath + "/money.sav";
+        private static string pathReputation = Application.persistentDataPath + "/reputation.sav";
         private static string pathScenes = Application.persistentDataPath + "/scenes.sav";
 
         
@@ -18,6 +19,16 @@ namespace SaveLogic
             FileStream stream = new FileStream(pathMoney, FileMode.Create);
             
             formatter.Serialize(stream, money);
+            stream.Close();
+        }
+        
+        public static void SaveReputation(int reputation)
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            
+            FileStream stream = new FileStream(pathReputation, FileMode.Create);
+            
+            formatter.Serialize(stream, reputation);
             stream.Close();
         }
         
@@ -52,6 +63,23 @@ namespace SaveLogic
                 int money = (int) formatter.Deserialize(stream);
                 stream.Close();
                 return money;
+            }
+
+            Debug.Log("Save file not found " + pathMoney);
+            throw new FileNotFoundException();
+        }
+        
+        public static int LoadReputation()
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+
+            if (File.Exists(pathReputation))
+            {
+                FileStream stream = new FileStream(pathReputation, FileMode.Open);
+
+                int reputation = (int) formatter.Deserialize(stream);
+                stream.Close();
+                return reputation;
             }
 
             Debug.Log("Save file not found " + pathMoney);
