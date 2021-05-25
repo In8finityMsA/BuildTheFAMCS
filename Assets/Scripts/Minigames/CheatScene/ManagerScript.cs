@@ -13,6 +13,7 @@ public class ManagerScript : MonoBehaviour
     public bool IsPlaying = false;
     public GameObject BackPanel;
     public GameObject HintBox;
+    public GameObject resulttext;
 
     public GameObject EndButton;
 
@@ -60,8 +61,14 @@ public class ManagerScript : MonoBehaviour
     {
 
         Clear();
-        EndButton.SetActive(true);     
-        EndButton.GetComponentInChildren<Text>().text = "Препод вас спалил(";  
+
+        //MainManager.Instance.Money -= penalty;
+        //MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
+
+        EndButton.SetActive(true);
+        resulttext.SetActive(true);
+        resulttext.GetComponent<Text>().text = "Препод вас спалил(" + '\n' + $"С вас {penalty} на пересдачу!";
+        EndButton.GetComponentInChildren<Text>().text = "OK";  
     }
 
     public void StartGame()
@@ -111,11 +118,15 @@ public class ManagerScript : MonoBehaviour
 
         //displaying end button
         EndButton.SetActive(true);
-        EndButton.GetComponentInChildren<Text>().text = "Вы не успели списать! Пара кончилась(";    
+        resulttext.SetActive(true);
+        resulttext.GetComponent<Text>().text = "Вы не успели списать! Пара кончилась(" + '\n' + $"С вас {penalty} на пересдачу!";
+        EndButton.GetComponentInChildren<Text>().text = "OK";    
     }
 
     void Awake()
     {
+
+
         var bottomLeft = Camera.main.ScreenToWorldPoint(Vector3.zero);
         var topRight = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, Camera.main.pixelHeight));
         cameraRect = new Rect(bottomLeft.x, bottomLeft.y, topRight.x - bottomLeft.x, topRight.y - bottomLeft.y);
@@ -190,7 +201,8 @@ public class ManagerScript : MonoBehaviour
         HasWon += UIHasWon;
         CurrentProgress = 0;
         teacherWatching = false;
-        students = new List<PhoneScript>();      
+        students = new List<PhoneScript>();
+        resulttext.SetActive(false);
     }
 
 
@@ -202,7 +214,9 @@ public class ManagerScript : MonoBehaviour
 
         //displaying end button
         EndButton.SetActive(true);
-        EndButton.GetComponentInChildren<Text>().text = "Вы сделали это!";
+        resulttext.SetActive(true);
+        resulttext.GetComponent<Text>().text = "Вы сделали это!" + '\n' + $"Вы заработали {reward}";
+        EndButton.GetComponentInChildren<Text>().text = "OK";
     }
 
     void Update()

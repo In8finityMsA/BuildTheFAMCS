@@ -48,6 +48,7 @@ public class ManagerBugsScript : MonoBehaviour
     }
     private void Awake()
     {
+        resulttext.SetActive(false);
         timer = 10;
         var bottomLeft = Camera.main.ScreenToWorldPoint(Vector3.zero);
         var topRight = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, Camera.main.pixelHeight));
@@ -105,24 +106,25 @@ public class ManagerBugsScript : MonoBehaviour
                 {
                     bugs[i].SetActive(false);
                 }
-                MainManager.Instance.Money -= penalty;
-                MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
+                //MainManager.Instance.Money -= penalty;
+                //MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
+                resulttext.SetActive(true);
+                resulttext.GetComponent<Text>().text = "Баги вас одолели(..." + '\n' + $"Ваши потери составили: {penalty}";
 
-                resulttext.GetComponent<Text>().text = "Баги вас одолели(..." + '\n' + $"Ваши потерисоставили: {penalty}";
 
-
-                EndButton.GetComponentInChildren<Button>().GetComponentInChildren<Text>().text = "OK";
+                EndButton.GetComponentInChildren<Button>().GetComponentInChildren<Text>().text = "OK(";
                 EndButton.SetActive(true);
             }
             if (bugs.Count == 0)
             {
                 MainManager.Instance.Money += reward;
                 MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
-                
-                EndButton.GetComponentInChildren<Button>().GetComponentInChildren<Text>().text = "Все починилось, все работает!";
+
+                resulttext.SetActive(true);
+                resulttext.GetComponent<Text>().text = "Все починилось, все работает!" + '\n' + $"Вы заработали {reward}";
+                EndButton.GetComponentInChildren<Button>().GetComponentInChildren<Text>().text = "OK!";
                 EndButton.SetActive(true);
             }
-        }
-        
+        }      
     }
 }
