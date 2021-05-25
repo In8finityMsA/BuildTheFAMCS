@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
-using TinyJson;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -28,31 +27,6 @@ public class CharacterScript : MonoBehaviour
         
         SetSprite();
 
-        var jsonRelativeFilename = Application.dataPath + "/Dialogs/" + characterInfo.jsonFilename;
-        if (File.Exists(jsonRelativeFilename))
-        {
-            Debug.Log("File found: " + jsonRelativeFilename + "!!!");
-            using (var reader = new StreamReader(jsonRelativeFilename))
-            {
-                string jsonString = reader.ReadToEnd();
-                var dialogArray = JsonUtility.FromJson<DialogArray>(jsonString);
-                if (dialogArray != null)
-                {
-                    dialog = dialogArray.array.ToList();
-                }
-                else
-                {
-                    Debug.Log("Json is NOT PARSED!!!");
-                }
-            }
-            
-        }
-        else
-        {
-            Debug.Log("No dialog file found: " + jsonRelativeFilename);
-            //throw new FileNotFoundException();
-        }
-        
         //Only for testing
         if (dialog == null)
         {
