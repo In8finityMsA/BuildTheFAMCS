@@ -26,6 +26,12 @@ public class ManagerWordsScript : MonoBehaviour
     Dictionary<GameObject, int> dict = new Dictionary<GameObject, int>();
     List<char> letters = new List<char>();
 
+
+    public bool IsPlaying = false;
+    public GameObject BackPanel;
+    public GameObject HintBox;
+    public GameObject EndButton;
+
     private bool isClicked = false;
     // Start is called before the first frame update
     private void Awake()
@@ -116,6 +122,14 @@ public class ManagerWordsScript : MonoBehaviour
         
        
     }
+
+    public void StartGame()
+    {
+        IsPlaying = true;
+        HintBox.SetActive(false);
+        BackPanel.GetComponent<UnityEngine.UI.Image>().color = Color.clear;
+    }
+
     void Start()
     {
         
@@ -185,7 +199,7 @@ public class ManagerWordsScript : MonoBehaviour
         //}      
         //return true;
     }
-    void OnClick()
+    public void OnClick()
     {
         if (!isClicked)
         {
@@ -196,26 +210,26 @@ public class ManagerWordsScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        
-        time -= Time.deltaTime;
-        if (time <= 0 )
-        {
-            TheEndTileScript.Instance.gameObject.GetComponentInChildren<Button>().onClick.AddListener(OnClick);
-            if (HasWon())
+        if (IsPlaying)
+        { 
+            time -= Time.deltaTime;
+            if (time <= 0 )
             {
-                MainManager.Instance.Money += reward;
-                TheEndTileScript.Instance.gameObject.GetComponentInChildren<Button>().GetComponentInChildren<Text>().text = "You have won!";
-                
+                if (HasWon())
+                {
+                    MainManager.Instance.Money += reward;
+                    EndButton.GetComponentInChildren<Button>().GetComponentInChildren<Text>().text = "You have won!";
+                    
+                }
+                else
+                {
+                    MainManager.Instance.Money -= penalty;
+                    EndButton.GetComponentInChildren<Button>().GetComponentInChildren<Text>().text = "You have lost!";
+                }
+                MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
+                EndButton.SetActive(true);
+                Clear();
             }
-            else
-            {
-                MainManager.Instance.Money -= penalty;
-                TheEndTileScript.Instance.gameObject.GetComponentInChildren<Button>().GetComponentInChildren<Text>().text = "You have lost!";
-            }
-            MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
-            TheEndTileScript.Instance.gameObject.SetActive(true);
-            Clear();
         }
     }
 }

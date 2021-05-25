@@ -108,10 +108,14 @@ public class TapScript : MonoBehaviour
     
     void OnMouseDown()
     {
-        if (!isEnding)
+        if (!isEnding && GameObject.Find("ManagerEmpty").GetComponent<ManagerTapScript>().IsPlaying)
         {       
             mouseDown = true;
             timeDown = time;
+        }
+        else if (!GameObject.Find("ManagerEmpty").GetComponent<ManagerTapScript>().IsPlaying)
+        {
+            GameObject.Find("ManagerEmpty").SendMessage("StartGame");
         }
     }
 

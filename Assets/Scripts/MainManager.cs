@@ -10,7 +10,7 @@ public class MainManager : MonoBehaviour
 {
     // Start is called before the first frame update
     public static MainManager Instance { get; set; }
-    
+
     public List<RoomScriptableObject> roomsList;
     private Dictionary<RoomScriptableObject, int> rooms = new Dictionary<RoomScriptableObject, int>();
     public List<string> scenesList = new List<string>() {"BugsScene", "CheatScene", "LatenessScene", "ServerScene", "WordScene"};
@@ -114,10 +114,6 @@ public class MainManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-    }
-
-    void Start()
-    {
         roomsUnlocked = new bool[roomsList.Count];
         money = defaultMoney;
         scenesCompleted = new bool[scenesList.Count];

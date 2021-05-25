@@ -13,5 +13,6 @@ public class CharacterScriptableObject : ScriptableObject
     public Sprite sprite;
     public List<string> minigameSceneNames;
     public bool hasQuest;
+    public CharacterScript script;
 
 }

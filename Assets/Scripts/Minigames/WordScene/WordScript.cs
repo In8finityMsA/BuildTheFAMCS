@@ -24,58 +24,61 @@ public class WordScript : MonoBehaviour
     void Update()
     {
         
+        if (GameObject.Find("ManagerEmpty").GetComponent<ManagerWordsScript>().IsPlaying)
+        {   
+            if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Moved && mouseDown)
+            {
+                Vector3 pos = Input.GetTouch(0).position;
+                pos = Camera.main.ScreenToWorldPoint(pos);
+                //distance = pos.x - touchPos.x;
+                float x = pos.x;
+                if (pos.x < cameraRect.x)
+                {
+                    x = cameraRect.x;
+                }
+                else if (pos.x > cameraRect.x + cameraRect.width)
+                {
+                    x = cameraRect.x + cameraRect.width;
+                }
+                float y = pos.y;
+                if (pos.y < cameraRect.y)
+                {
+                    y = cameraRect.y;
+                }
+                else if (pos.y > cameraRect.y + cameraRect.height/2)
+                {
+                    y = cameraRect.y + cameraRect.height/2;
+                }
 
-        if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Moved && mouseDown)
-        {
-            Vector3 pos = Input.GetTouch(0).position;
-            pos = Camera.main.ScreenToWorldPoint(pos);
-            //distance = pos.x - touchPos.x;
-            float x = pos.x;
-            if (pos.x < cameraRect.x)
-            {
-                x = cameraRect.x;
+                transform.position = new Vector3(x, y, 0);
+        
             }
-            else if (pos.x > cameraRect.x + cameraRect.width)
+            else
             {
-                x = cameraRect.x + cameraRect.width;
-            }
-            float y = pos.y;
-            if (pos.y < cameraRect.y)
-            {
-                y = cameraRect.y;
-            }
-            else if (pos.y > cameraRect.y + cameraRect.height/2)
-            {
-                y = cameraRect.y + cameraRect.height/2;
-            }
+                Vector3 pos = gameObject.transform.position;
+                float x = pos.x;
+                if (pos.x < cameraRect.x)
+                {
+                    x = cameraRect.x;
+                }
+                else if (pos.x > cameraRect.x + cameraRect.width)
+                {
+                    x = cameraRect.x + cameraRect.width;
+                }
+                float y = pos.y;
+                if (pos.y < cameraRect.y)
+                {
+                    y = cameraRect.y;
+                }
+                else if (pos.y > cameraRect.y + cameraRect.height / 2)
+                {
+                    y = cameraRect.y + cameraRect.height / 2;
+                }
 
-            transform.position = new Vector3(x, y, 0);
-     
+                transform.position = new Vector3(x, y, 0);
+            }
         }
-        else
-        {
-            Vector3 pos = gameObject.transform.position;
-            float x = pos.x;
-            if (pos.x < cameraRect.x)
-            {
-                x = cameraRect.x;
-            }
-            else if (pos.x > cameraRect.x + cameraRect.width)
-            {
-                x = cameraRect.x + cameraRect.width;
-            }
-            float y = pos.y;
-            if (pos.y < cameraRect.y)
-            {
-                y = cameraRect.y;
-            }
-            else if (pos.y > cameraRect.y + cameraRect.height / 2)
-            {
-                y = cameraRect.y + cameraRect.height / 2;
-            }
-
-            transform.position = new Vector3(x, y, 0);
-        }
+        
     }
 
     void OnMouseDown()

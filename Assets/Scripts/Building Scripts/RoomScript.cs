@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class RoomScript : MonoBehaviour
 {
@@ -41,6 +42,7 @@ public class RoomScript : MonoBehaviour
     private void RoomUnlock()
     {
         MainManager.Instance.Money -= roomInfo.costToBuild;
+        roomInfo.isUnlocked = true;
         MainManager.Instance.SetRoomUnlocked(roomInfo, true);
         SetSprite();
         DrawCharacters();
@@ -63,6 +65,12 @@ public class RoomScript : MonoBehaviour
 
     void OnMouseDown()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            Debug.Log("Clicked on UI");
+            return;
+        }
+        
         time = System.DateTime.Now;
     }
     
@@ -70,17 +78,30 @@ public class RoomScript : MonoBehaviour
     {
         if (System.DateTime.Now - time < new TimeSpan(0, 0, 1))
         {
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                Debug.Log("Clicked on UI");
+                return;
+            }
+
             Debug.Log($"Room Clicked! floor: {roomInfo.floor}, index: {roomInfo.indexInFloor}.");
-            if (MainManager.Instance.Money >= roomInfo.costToBuild && roomInfo.isUnlocked == false)
+            if (roomInfo.isUnlocked == true)
             {
-                RoomUnlock();
-                Debug.Log("Room is unlocked");
+                roomInfo.characters[0].script.StartDialog();
             }
-            else if (roomInfo.isUnlocked == false)
+            if (roomInfo.isUnlocked == false)
             {
-                Debug.Log("Room can't be unlocked. Not enough money.");
+                if (MainManager.Instance.Money >= roomInfo.costToBuild)
+                {
+                    RoomUnlock();
+                    Debug.Log("Room is unlocked");
+                }
+                else
+                {
+                    Debug.Log("Room can't be unlocked. Not enough money.");
+                }
             }
-            
+
         }
     }
     
