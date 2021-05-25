@@ -20,14 +20,13 @@ public class TowerMenu : MonoBehaviour
             return;
         }
 
-        if (ObjectIsTower(obj) == false && ObjectIsBuildPlaceAndDontHaveTower(obj) == false){
+        if (ObjectIsTower(obj) == false && ObjectIsBuildPlaceAndDontHaveTower(obj) == false)
             return;
-        }     
+
         if (obj.transform.childCount == 1)
             target = obj.transform.GetChild(0).gameObject;
         else
             target = obj;
-        
         
         gameObject.SetActive(true);
         transform.position = target.transform.position;
