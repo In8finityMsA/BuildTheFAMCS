@@ -13,6 +13,7 @@ public class ManagerScript : MonoBehaviour
     public bool IsPlaying = false;
     public GameObject BackPanel;
     public GameObject HintBox;
+    public GameObject resulttext;
 
     public GameObject EndButton;
 
@@ -106,12 +107,13 @@ public class ManagerScript : MonoBehaviour
     public void EndOfTime()
     {
         Clear();
-        //MainManager.Instance.Money -= penalty;
-        //MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
+        MainManager.Instance.Money -= penalty;
+        MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
 
         //displaying end button
         EndButton.SetActive(true);
-        EndButton.GetComponentInChildren<Text>().text = "Вы не успели списать! Пара кончилась(";    
+        resulttext.GetComponent<Text>().text = "Вы не успели списать! Пара кончилась(";
+        EndButton.GetComponentInChildren<Text>().text = "OK";    
     }
 
     void Awake()
