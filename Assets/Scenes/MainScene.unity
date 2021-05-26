@@ -170,7 +170,7 @@ MonoBehaviour:
   - WordScene
   useSaves: 1
   resetSavesOnStartup: 0
-  defaultMoney: 5000
+  defaultMoney: 10000
   defultReputation: 50
   defaultRooms: 0000000000000000
   defaultScenes: 0000000000

@@ -86,7 +86,7 @@ public class Manager : MonoBehaviour
         }
         else if (IsLose && !IsWin)
         {
-            MainManager.Instance.Money -= penalty;
+            MainManager.Instance.Reputation -= penalty;
             Debug.Log(gameObject.scene.name);
             MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
             EndButton.GetComponentInChildren<Text>().text = "You have lost!";

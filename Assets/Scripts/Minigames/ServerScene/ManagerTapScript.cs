@@ -114,8 +114,8 @@ public class ManagerTapScript : MonoBehaviour
 
     void UITheEndWon()
     {
-        //MainManager.Instance.Money += reward;
-        //MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
+        MainManager.Instance.Money += reward;
+        MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
 
         ResultText.SetActive(true);
         ResultText.GetComponent<Text>().text = $"Поздравляем, вы смогли восстановить сервер! {reward}";
@@ -126,8 +126,8 @@ public class ManagerTapScript : MonoBehaviour
 
     void UITheEndLose()
     {
-        //MainManager.Instance.Money -= penalty;
-        //MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
+        MainManager.Instance.Reputation -= penalty;
+        MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
 
         ResultText.SetActive(true);
         ResultText.GetComponent<Text>().text = $"Серж, сервер упал, вы потеряли деньги {penalty}";

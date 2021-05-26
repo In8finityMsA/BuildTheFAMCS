@@ -62,8 +62,8 @@ public class ManagerScript : MonoBehaviour
 
         Clear();
 
-        //MainManager.Instance.Money -= penalty;
-        //MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
+        MainManager.Instance.Reputation -= penalty;
+        MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
 
         EndButton.SetActive(true);
         resulttext.SetActive(true);
@@ -113,8 +113,8 @@ public class ManagerScript : MonoBehaviour
     public void EndOfTime()
     {
         Clear();
-        //MainManager.Instance.Money -= penalty;
-        //MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
+        MainManager.Instance.Reputation -= penalty;
+        MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
 
         //displaying end button
         EndButton.SetActive(true);
@@ -209,8 +209,8 @@ public class ManagerScript : MonoBehaviour
     void UIHasWon()
     {        
         Clear();
-        //MainManager.Instance.Money += reward;
-        //MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
+        MainManager.Instance.Money += reward;
+        MainManager.Instance.SetSceneCompleted(gameObject.scene.name, true);
 
         //displaying end button
         EndButton.SetActive(true);

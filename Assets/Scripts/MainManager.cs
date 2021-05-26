@@ -74,7 +74,7 @@ public class MainManager : MonoBehaviour
         get => money;
         set
         {
-            moneyText.GetComponent<Text>().text = value.ToString();
+            
             SaveScript.SaveMoney(value);
             money = value;
             OnMoneyChange?.Invoke(money);
@@ -86,7 +86,7 @@ public class MainManager : MonoBehaviour
         get => reputation;
         set
         {
-            repText.GetComponent<Text>().text = value.ToString();
+            
             SaveScript.SaveReputation(value);
             reputation = value;
             OnReputationChange?.Invoke(reputation);
@@ -267,6 +267,8 @@ public class MainManager : MonoBehaviour
             newGame = false;
             StartDialog(dialogArray);
         }
+        repText.GetComponent<Text>().text = reputation.ToString();
+        moneyText.GetComponent<Text>().text = money.ToString();
     }
 
     public void StartDialog(List<DialogPart> dialog)
@@ -363,8 +365,9 @@ public class MainManager : MonoBehaviour
                                             break;
                                         }
                                     }
-
+                                    
                                     buttons[buttonIndex].onClick.AddListener(() => Money -= price);
+                                    buttons[buttonIndex].onClick.AddListener(() => moneyText.GetComponent<Text>().text = money.ToString());
                                     buttons[buttonIndex].onClick.AddListener(() => DisplayPart(part));
                                 }
                                 else
